@@ -18,12 +18,10 @@ if (!isset($_GET["id"]))
 
 $uid = intval($_GET["id"]);
 
-$db = new PDO("mysql:host=localhost;dbname=spirarenet", "root", "");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$statement = $db->query("SELECT * FROM users WHERE id=" . $uid);
+require "dbtools.php";
 
-$user = $statement->fetch(PDO::FETCH_ASSOC);
+$user = DB::selectById("users", $uid);
 
 if ($user)
 {
