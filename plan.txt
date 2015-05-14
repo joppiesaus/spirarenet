@@ -1,0 +1,49 @@
+=== THE GRAND PLAN ===
+
+- Accounts
+	- name, picture, bio, etc.
+	- email
+	- properties
+		- tags that define interests("sporting", "programming", "painting")
+		- badges that define the persons special properties("Director", "Founder")
+		- should all be JSON
+
+- If someone has an idea, it can just select a property and send it to all people with that
+  property via email(or something).
+	- Example: James wants to do a day of pizza baking, it just creates a message and
+	  just sends it to all people with the tag "cooking"
+
+- You can create events, and let people now based on properties
+	- private, public
+
+- Or you can just send messages
+
+- Table of users
+	[]	id
+	[]	json
+		[] profile
+			[] name	
+			[] email
+			[] picture_url
+			[] bio
+		[] properties
+			[] tags and badgeschoose between tag and badge
+			[] tags
+			[] badges
+
+- Table of properties
+	[] id
+	[] json
+		[] type(tag or badge)
+		[] name
+		[] description
+		[] css url, css classname
+		[] users(id's)
+	
+
+- Stored in a DB.
+- PHP?
+
+
+Now
+where do I start?
