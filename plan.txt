@@ -22,7 +22,8 @@
 	[]	id
 	[]	json
 		[] profile
-			[] name	
+			[] name
+			[] password(duh)	
 			[] email
 			[] picture_url
 			[] bio
