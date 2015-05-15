@@ -7,7 +7,8 @@
 <body>
 
 <form action="do_createuser.php" method="post">
-	Name: <input type="text" name="username"><br>
+	Username: <input type="text" name="username"><br>
+	Real name: <input type="text" name="userrealname"><br>
 	Password: <input type="password" name="userpassword"><br>
 	Email: <input type="text" name="useremail"><br>
 	Bio: <textarea rows="20" cols="50" name="userbio"></textarea><br>

@@ -1,20 +1,29 @@
 <?php
 
-require "dbtools.php";
+if (empty($_POST))
+{
+	echo "No data provided!";
+	exit;
+}
 
+require "main.php";
+
+$user = new User;
 
 // TODO: properties
-DB::insert("users", array(
+$user->json = array(
 		"profile" => array(
-				"name" => $_POST["username"], 
+				"username" => $_POST["username"], 
+				"name" => $_POST["userrealname"],
 				"password" => $_POST["userpassword"],
 				"email" => $_POST["useremail"],
 				"picture_url" => NULL,
 				"bio" => $_POST["userbio"]
 			),
 		"properties" => NULL
-	)
-);
+	);
+
+$user->create();
 
 // TODO: Make header to the new profile!
 

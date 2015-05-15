@@ -16,12 +16,13 @@
 - You can create events, and let people now based on properties
 	- private, public
 
-- Or you can just send messages
+- Or you can just send messages, based on people or property
 
 - Table of users
 	[]	id
 	[]	json
 		[] profile
+			[] username
 			[] name
 			[] password(duh)	
 			[] email
@@ -31,6 +32,8 @@
 			[] tags and badgeschoose between tag and badge
 			[] tags
 			[] badges
+Imported as class User
+
 
 - Table of properties
 	[] id
@@ -38,9 +41,11 @@
 		[] type(tag or badge)
 		[] name
 		[] description
-		[] css url, css classname
-		[] users(id's)
-	
+		[] users(id's) - is left empty when on profile page only
+		[] CSS, css classname (optional)
+Imported as class Property
+
+- CSS for badges should be generated, and loaded on webpage when needed.	
 
 - Stored in a DB.
 - PHP?

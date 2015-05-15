@@ -6,8 +6,7 @@
 </head>
 <body>
 
-<pre>
-
+<div id="container"> 
 <?php
 
 if (!isset($_GET["id"]))
@@ -19,14 +18,21 @@ if (!isset($_GET["id"]))
 $uid = intval($_GET["id"]);
 
 
-require "dbtools.php";
+require "main.php";
 
-$user = DB::selectById("users", $uid);
-
+$user = new User;
+$user->id = $uid;
+$user->load();
 if ($user)
 {
+	$userj = $user->json["profile"];
+	$name = $userj["name"];
+
 	// user exists, print
-	var_dump($user);
+	echo '<img class="uprofile_pic" src="' . $userj["picture_url"] . '" alt="' . $name . '\'s profile picture" />';
+	echo '<p class="uprofile_name">' . $name . '</p>';
+	echo '<p class="uprofile_username">' . $userj["username"] . '</p>';
+	echo '<p class="uprofile_bio">' . $userj["bio"] . '</p>';
 }
 else
 {
@@ -36,6 +42,7 @@ else
 
 
 ?>
+</div>
 
 </body>
 </html>
