@@ -34,6 +34,32 @@ class User extends JsonDBObject
 class Property extends JsonDBObject
 {
 	protected $TABLE = "properies";
+
+	// Creates a new property
+	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS, additionalCssDependencies - Additional required css, but does not fit in class - usage unique and disencourged when not needed
+	public static function createPropertyJson($name, $description, $type, $id = NULL, $css = "", $additionalCssDependencies = "")
+	{
+		$json = array();
+		$json["type"] = $type;
+		$json["name"] = $name;
+		$json["description"] = $description;
+
+		if (isset($id))
+		{
+			$json["id"] = $id;
+		}
+		if (isset($css))
+		{
+			$json["css"] = $css;
+
+			if (isset($additionalCssDependencies))
+			{
+				$json["cssadditional"] = $additionalCssDependencies;
+			}
+		}
+
+		return $json;
+	}
 }
 
 ?>

@@ -1,5 +1,7 @@
 === THE GRAND PLAN ===
 
+Let's see if I can get this to something
+
 - Accounts
 	- name, picture, bio, etc.
 	- email
@@ -29,7 +31,9 @@
 			[] picture_url
 			[] bio
 		[] properties
-			[] tags and badgeschoose between tag and badge
+			0  tags and badges, choose between tag and badge
+				o A tag is something you like, like cooking
+				o And a badge is something you "earn" or "am", like being a teacher or a student
 			[] tags
 			[] badges
 Imported as class User
@@ -38,18 +42,21 @@ Imported as class User
 - Table of properties
 	[] id
 	[] json
-		[] type(tag or badge)
-		[] name
-		[] description
-		[] users(id's) - is left empty when on profile page only
-		[] CSS, css classname (optional)
+		[] users(id's)
+		[] property - this is what gets saved on someone's profile
+			[] type(tag or badge)
+			[] id(optional)
+			[] name
+			[] description
+			[] CSS (optional) - contents described here just stored in JSON, not in-sub object
+				[] css - the css class, *contents* of css class
+					o auto-generated classname, on page load? At least not static.
+				[] cssadditional - additional dependencies (optional)
+					o for animation or something, like a rainbow
+					o should almost never be used
+ 
 Imported as class Property
 
 - CSS for badges should be generated, and loaded on webpage when needed.	
 
 - Stored in a DB.
-- PHP?
-
-
-Now
-where do I start?
