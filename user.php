@@ -33,6 +33,17 @@ if ($user)
 	echo '<p class="uprofile_name">' . $name . '</p>';
 	echo '<p class="uprofile_username">' . $userj["username"] . '</p>';
 	echo '<p class="uprofile_bio">' . $userj["bio"] . '</p>';
+
+	if (!empty($user->json["properties"]))
+	{
+
+		$disp = new PropertyPageBuilder;
+		$disp->begin();
+		echo '<div class="uprofile_properties">';
+		$disp->displayProperties($user->json["properties"]);
+		$disp->end();
+		echo '</div>';
+	}
 }
 else
 {

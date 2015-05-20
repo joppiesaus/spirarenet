@@ -20,7 +20,8 @@ $user->json = array(
 				"picture_url" => NULL,
 				"bio" => $_POST["userbio"]
 			),
-		"properties" => NULL
+		// TEMP TEMP TEMP
+		"properties" => json_decode($_POST["userproperties"])
 	);
 
 $user->create();

@@ -12,7 +12,12 @@
 	Password: <input type="password" name="userpassword"><br>
 	Email: <input type="text" name="useremail"><br>
 	Bio: <textarea rows="20" cols="50" name="userbio"></textarea><br>
-	<input type="Submit">
+	Property JSON: <?php
+	require "main.php";
+
+	echo '<textarea name="userproperties">' . json_encode(array(Property::createProperty("name", "description", "badge"))) . '</textarea>';
+	?><!--<input type="text" name="userproperties"><br>-->
+	<br><br><input type="Submit">
 </form>
 
 </body>

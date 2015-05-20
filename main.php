@@ -2,6 +2,42 @@
 
 require "dbtools.php";
 
+//require "cssGenerator.php";
+
+class PropertyPageBuilder
+{
+	var $output = "";
+
+	public function begin()
+	{
+	}
+
+	public function end()
+	{
+		echo $this->output;
+	}
+
+	public function displayProperty($prop)
+	{
+		// TODO: CSS & cssGenerator, improve
+		$this->output .= "<span class=\"property " . $prop["type"];
+		if (isset($prop["css"]))
+		{
+			// TODO: add classname
+		}
+		$this->output .=  "\" title=" . $prop["description"] . ">" . $prop["name"] . "</span>";
+	}
+
+	public function displayProperties($props)
+	{
+		foreach ($props as $prop)
+		{
+			$this->displayProperty($prop);
+		}
+	}
+
+}
+
 class JsonDBObject
 {
 	// TODO: Make this static
@@ -48,11 +84,11 @@ class Property extends JsonDBObject
 		{
 			$prop["id"] = $id;
 		}
-		if (isset($css))
+		if (!empty($css))
 		{
 			$prop["css"] = $css;
 
-			if (isset($additionalCssDependencies))
+			if (!empty($additionalCssDependencies))
 			{
 				$prop["cssadditional"] = $additionalCssDependencies;
 			}
