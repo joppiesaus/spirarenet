@@ -1,0 +1,10 @@
+.property
+{
+	background-color: black;
+	color: white;
+}
+.property:hover
+{
+	color: black;
+	background-color: white;
+}

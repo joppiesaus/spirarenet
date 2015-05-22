@@ -20,12 +20,12 @@ class PropertyPageBuilder
 	public function displayProperty($prop)
 	{
 		// TODO: CSS & cssGenerator, improve
-		$this->output .= "<span class=\"property " . $prop["type"];
+		$this->output .= "<div class=\"property " . $prop["type"];
 		if (isset($prop["css"]))
 		{
 			// TODO: add classname
 		}
-		$this->output .=  "\" title=" . $prop["description"] . ">" . $prop["name"] . "</span>";
+		$this->output .=  "\" title=" . $prop["description"] . ">" . $prop["name"] . "</div>";
 	}
 
 	public function displayProperties($props)

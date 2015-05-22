@@ -54,9 +54,18 @@ Imported as class User
 				[] cssadditional - additional dependencies (optional)
 					o for animation or something, like a rainbow
 					o should almost never be used
+
+- Table of events
+	[] id
+	[] json
+		[] badge
+		[] ???
  
 Imported as class Property
 
-- CSS for badges should be generated, and loaded on webpage when needed.	
+TODO:
+- CSS generation(one file)
+- Link properties and users
 
-- Stored in a DB.
+
+selectsize

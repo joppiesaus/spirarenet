@@ -3,6 +3,7 @@
 <head>
 	<title>userrrr</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 
@@ -36,7 +37,6 @@ if ($user)
 
 	if (!empty($user->json["properties"]))
 	{
-
 		$disp = new PropertyPageBuilder;
 		$disp->begin();
 		echo '<div class="uprofile_properties">';
