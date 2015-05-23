@@ -27,6 +27,15 @@ class DB
 		$statement->execute(array(":json" => json_encode($properties)));
 	}
 
+	// Edits a row
+	public static function edit($table, $id, $properties)
+	{
+		$db = new PDO("mysql:host=" . DBSERVER . ";dbname=spirarenet", DBUSER, DBPASSWORD);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$statement = $db->prepare("UPDATE " . $table . "SET json=:json WHERE id=" . $id);
+		$statement->esecute(array(":json" => json_encode($properties)));
+	}
 }
 
 ?>

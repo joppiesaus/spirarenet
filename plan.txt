@@ -20,6 +20,10 @@ Let's see if I can get this to something
 
 - Or you can just send messages, based on people or property
 
+0  tags and badges, choose between tag and badge
+	o A tag is something you like, like cooking
+	o And a badge is something you "earn" or "am", like being a teacher or a student
+
 - Table of users
 	[]	id
 	[]	json
@@ -31,11 +35,7 @@ Let's see if I can get this to something
 			[] picture_url
 			[] bio
 		[] properties
-			0  tags and badges, choose between tag and badge
-				o A tag is something you like, like cooking
-				o And a badge is something you "earn" or "am", like being a teacher or a student
-			[] tags
-			[] badges
+			(see property in table properties)
 Imported as class User
 
 

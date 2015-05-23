@@ -53,7 +53,7 @@ class JsonDBObject
 
 	public function save()
 	{
-
+		DB::edit($TABLE, $id, $json);
 	}
 
 	public function load()
@@ -65,13 +65,22 @@ class JsonDBObject
 class User extends JsonDBObject
 {
 	protected $TABLE = "users";
+
+	// Adds and links an property(JsonDBObject) to this user.
+	public function addProperty(&$prop)
+	{
+		array_push($this->["properties"], $prop->json["property"]);
+
+		$this->save();
+		$prop->addUser($this->id);
+	}
 }
 
 class Property extends JsonDBObject
 {
 	protected $TABLE = "properies";
 
-	// Creates a new property
+	// Creates a new property(json only, not the dbobj)
 	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS, additionalCssDependencies - Additional required css, but does not fit in class - usage unique and disencourged when not needed
 	public static function createProperty($name, $description, $type, $id = NULL, $css = "", $additionalCssDependencies = "")
 	{
@@ -95,6 +104,13 @@ class Property extends JsonDBObject
 		}
 
 		return $prop;
+	}
+
+	// Adds an user to this
+	public function addUser($uid)
+	{
+		array_push($this->json["users"], $uid);
+		$this->save();
 	}
 }
 
