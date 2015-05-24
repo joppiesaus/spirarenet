@@ -26,6 +26,6 @@ $user->json = array(
 
 $user->create();
 
-// TODO: Make header to the new profile!
+header("Location:user.php?id=" . $user->id);
 
 ?>

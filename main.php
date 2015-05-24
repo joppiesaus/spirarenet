@@ -78,7 +78,7 @@ class User extends JsonDBObject
 
 class Property extends JsonDBObject
 {
-	protected $TABLE = "properies";
+	protected $TABLE = "properties";
 
 	// Creates a new property(json only, not the dbobj)
 	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS, additionalCssDependencies - Additional required css, but does not fit in class - usage unique and disencourged when not needed

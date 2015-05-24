@@ -64,8 +64,8 @@ Imported as class User
 Imported as class Property
 
 TODO:
-- CSS generation(one file)
 - Link properties and users
-
+- Add "view" method to property, displays it on page
+- CSS generation(one file)
 
 selectsize
