@@ -13,6 +13,7 @@ $prop->json = array(
 		"users" => array(),
 		"property" => array(
 				// TODO: ID ID DIDI DSFIJASDFIOJASDFIOJASDL;FIJASDF;IOAJSDFO;IJ
+				// CSSSSSSSGENNN
 				"id" => NULL,
 				"type" => $_POST["type"],
 				"name" => $_POST["name"],
@@ -33,6 +34,7 @@ if (!empty($_POST["css"]))
 $prop->create();
 
 echo "Succesfully created " . $_POST["type"] . " " . $_POST["name"] . "!";
+$prop->display():
 
 
 ?>

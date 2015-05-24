@@ -54,6 +54,8 @@ Imported as class User
 				[] cssadditional - additional dependencies (optional)
 					o for animation or something, like a rainbow
 					o should almost never be used
+				[] cssclass
+					o classname
 
 - Table of events
 	[] id

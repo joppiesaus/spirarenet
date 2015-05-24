@@ -4,40 +4,6 @@ require "dbtools.php";
 
 //require "cssGenerator.php";
 
-class PropertyPageBuilder
-{
-	var $output = "";
-
-	public function begin()
-	{
-	}
-
-	public function end()
-	{
-		echo $this->output;
-	}
-
-	public function displayProperty($prop)
-	{
-		// TODO: CSS & cssGenerator, improve
-		$this->output .= "<div class=\"property " . $prop["type"];
-		if (isset($prop["css"]))
-		{
-			// TODO: add classname
-		}
-		$this->output .=  "\" title=" . $prop["description"] . ">" . $prop["name"] . "</div>";
-	}
-
-	public function displayProperties($props)
-	{
-		foreach ($props as $prop)
-		{
-			$this->displayProperty($prop);
-		}
-	}
-
-}
-
 class JsonDBObject
 {
 	// TODO: Make this static
@@ -59,6 +25,47 @@ class JsonDBObject
 	public function load()
 	{
 		$this->json = json_decode(DB::selectById($this->TABLE, $this->id)["json"], true);
+	}
+}
+
+// Helper class
+class Main
+{
+	// Displays all properties in the array. All json, not JsonDBObjects
+	public static function displayProperties($props)
+	{
+		foreach ($props as $prop)
+		{
+			Main::displayProperty($prop);
+		}
+	}
+
+	// Displays the property on the page. Make sure you included style.css. prop is propery json
+	public static function displayProperty($prop)
+	{
+		$output = "<div class=\"property " . $prop["type"];
+		if (isset($prop["css"]))
+		{
+			$output .= " " . $prop["cssclass"]; // !Implement!
+		}
+		$output .= "\" title=\"" . $prop["description"] . "\">" . $prop["name"] . "</div>";
+		echo $output;
+	}
+
+	public static function loadUser($id)
+	{
+		$user = new User;
+		$user->id = $id;
+		$user->load();
+		return $user;
+	}
+
+	public static function loadProperty($id)
+	{
+		$prop = new Property;
+		$prop->id = $id;
+		$prop->load();
+		return $prop;
 	}
 }
 
@@ -111,6 +118,12 @@ class Property extends JsonDBObject
 	{
 		array_push($this->json["users"], $uid);
 		$this->save();
+	}
+
+	
+	public function display()
+	{
+		Main::displayProperty($this->json["property"]);
 	}
 }
 

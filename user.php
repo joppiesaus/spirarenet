@@ -37,11 +37,8 @@ if ($user)
 
 	if (!empty($user->json["properties"]))
 	{
-		$disp = new PropertyPageBuilder;
-		$disp->begin();
 		echo '<div class="uprofile_properties">';
-		$disp->displayProperties($user->json["properties"]);
-		$disp->end();
+		Main::displayProperties($user->json["properties"]);
 		echo '</div>';
 	}
 }
