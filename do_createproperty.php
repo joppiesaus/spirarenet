@@ -34,7 +34,7 @@ if (!empty($_POST["css"]))
 $prop->create();
 
 echo "Succesfully created " . $_POST["type"] . " " . $_POST["name"] . "!";
-$prop->display():
+$prop->display();
 
 
 ?>
