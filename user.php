@@ -30,10 +30,10 @@ if ($user)
 	$name = $userj["name"];
 
 	// user exists, print
-	echo '<img class="uprofile_pic" src="' . $userj["picture_url"] . '" alt="' . $name . '\'s profile picture" />';
-	echo '<p class="uprofile_name">' . $name . '</p>';
-	echo '<p class="uprofile_username">' . $userj["username"] . '</p>';
-	echo '<p class="uprofile_bio">' . $userj["bio"] . '</p>';
+	echo '<img id="uprofile_pic" src="' . $userj["picture_url"] . '" alt="' . $name . '\'s profile picture" />';
+	echo '<p id="uprofile_name">' . $name . '</p>';
+	echo '<p id="uprofile_username">' . $userj["username"] . '</p>';
+	echo '<p id="uprofile_bio">' . $userj["bio"] . '</p>';
 
 	if (!empty($user->json["properties"]))
 	{

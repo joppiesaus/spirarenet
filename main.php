@@ -69,7 +69,7 @@ class User extends JsonDBObject
 	// Adds and links an property(JsonDBObject) to this user.
 	public function addProperty(&$prop)
 	{
-		array_push($this->["properties"], $prop->json["property"]);
+		array_push($this->json["properties"], $prop->json["property"]);
 
 		$this->save();
 		$prop->addUser($this->id);
