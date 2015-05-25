@@ -4,6 +4,7 @@
 	<title>userrrr</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="js/profilepropertyediting.js"></script>
 </head>
 <body>
 
@@ -37,7 +38,7 @@ if ($user)
 
 	if (!empty($user->json["properties"]))
 	{
-		echo '<div class="uprofile_properties">';
+		echo '<div id="uprofile_properties">';
 		Main::displayProperties($user->json["properties"]);
 		echo '</div>';
 	}

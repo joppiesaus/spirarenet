@@ -23,13 +23,51 @@ body
 }
 #uprofile_pic
 {
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	width: 260px;
 	float: right;
 	position: relative;
-	top: -15px;
+	top: -20px;
 }
+
+.p_userpreview
+{
+	display: inline-block;
+	margin: 1px 1px 1px 1px;
+	padding: 2px 2px 2px 2px;
+	color: black;
+
+	background-color: rgba(129,129,129,0.2);
+	cursor: pointer;
+	width: 96px;
+}
+.p_userpreview:hover
+{
+	background-color: black;
+	color: white;
+}
+
+.p_userpreview img
+{
+	width: 94px;
+	height: 94px;
+}
+
+.p_userpreview p
+{
+	position: relative;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.p_userpreview a,.p_userpreview a:visited
+{
+	text-decoration: none;
+	color: inherit;
+}
+
 .property
 {
 	display: inline-block;

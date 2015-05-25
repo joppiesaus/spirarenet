@@ -54,7 +54,12 @@ class Main
 		{
 			$output .= " " . $prop["cssclass"]; // !Implement!
 		}
-		$output .= "\" title=\"" . $prop["description"] . "\">" . $prop["name"] . "</div>";
+		$output .= "\" alt=\"" . $prop["description"] . "\"";
+		if (!empty($prop["id"]))
+		{
+			$output .= " onclick=\"propertyClick('" . $prop->id . "')\"";
+		}
+		$output .=  ">" . $prop["name"] . "</div>";
 		echo $output;
 	}
 
