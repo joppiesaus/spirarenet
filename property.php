@@ -24,9 +24,18 @@ require "main.php";
 $prop = Main::loadProperty($pid);
 $jp = $prop->json["property"];
 
+
 // Todo: Do seperate CSS
 echo "<p id=\"uprofile_name\">" . $jp["name"] . "</p>";
 echo "<p>" . $jp["description"] . "</p>";
+
+// TODO: Check if user already has property, then handle it another way(e.g. remove this badge)
+
+session_start();
+if (isset($_SESSION["uid"]))
+{
+	echo "<input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"window.location='usersystem.php?action=addproperty&pid=" . $pid . "'\"/>";
+}
 
 if (!empty($prop->json["users"]))
 {

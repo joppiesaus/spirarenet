@@ -57,7 +57,7 @@ class Main
 		$output .= "\" alt=\"" . $prop["description"] . "\"";
 		if (!empty($prop["id"]))
 		{
-			$output .= " onclick=\"propertyClick('" . $prop->id . "')\"";
+			$output .= " onclick=\"propertyClick('" . $prop["id"] . "')\"";
 		}
 		$output .=  ">" . $prop["name"] . "</div>";
 		echo $output;
@@ -66,7 +66,7 @@ class Main
 	public static function loadUser($id)
 	{
 		$user = new User;
-		$user->id = $id;
+		$user->id = intval($id);
 		$user->load();
 		return $user;
 	}
@@ -74,7 +74,7 @@ class Main
 	public static function loadProperty($id)
 	{
 		$prop = new Property;
-		$prop->id = $id;
+		$prop->id = intval($id);
 		$prop->load();
 		return $prop;
 	}
@@ -87,6 +87,7 @@ class User extends JsonDBObject
 	// Adds and links an property(JsonDBObject) to this user.
 	public function addProperty(&$prop)
 	{
+		// TODO: Check if the user already has property
 		array_push($this->json["properties"], $prop->json["property"]);
 
 		$this->save();
