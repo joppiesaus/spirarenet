@@ -34,7 +34,7 @@ class DB
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$statement = $db->prepare("UPDATE " . $table . " SET json=:json WHERE id=" . $id);
-		$statement->esecute(array(":json" => json_encode($properties)));
+		$statement->execute(array(":json" => json_encode($properties)));
 	}
 }
 
