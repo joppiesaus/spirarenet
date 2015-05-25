@@ -20,16 +20,24 @@ if (!isset($_GET["id"]))
 include "main.php";
 
 $prop = Main::loadProperty($_GET["id"]);
-$prop->display();
 
-
-echo "<br><br>Users:<br>";
-$users = $prop->json["users"];
-
-foreach ($users as $uid)
+if (is_null($prop->json))
 {
-	$user = Main::loadUser($uid);
-	echo "<a href=\"user.php?id=" . $uid . "\">" . $user->json["name"] . "</a><br>";
+	echo "<p style=\"color:white;background-color:red;padding:5px\"><b>Property json is null, it probably doesn't exist!</b> <a href=\"createproperty.php\">Create it</a></p>";
+}
+else
+{
+	$prop->display();
+
+
+	echo "<br><br>Users:<br>";
+	$users = $prop->json["users"];
+
+	foreach ($users as $uid)
+	{
+		$user = Main::loadUser($uid);
+		echo "<a href=\"user.php?id=" . $uid . "\">" . $user->json["profile"]["name"] . "</a><br>";
+	}
 }
 
 echo "<br><br><pre>";

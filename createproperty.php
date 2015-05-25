@@ -11,7 +11,7 @@
 	Name: <input type="text" name="name"><br>
 	Description: <input type="text" name="description"><br>
 	CSS class(optional): <input type="text" name="css"><br>
-	CSS dependencies(danger zone): <input type="text" name="cssdeps"><br>
+	CSS dependencies(danger zone): <input type="text" name="cssdeps"><br><br>
 
 	<br><br><input type="Submit">
 </form>

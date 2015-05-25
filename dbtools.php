@@ -17,14 +17,20 @@ class DB
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
 
-	// Creates a new row
+	// Creates a new row. Returns id on succes, 
 	public static function insert($table, $properties)
 	{
 		$db = new PDO("mysql:host=" . DBSERVER . ";dbname=spirarenet", DBUSER, DBPASSWORD);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$statement = $db->prepare("INSERT INTO " . $table . "(json) VALUES(:json)");
-		$statement->execute(array(":json" => json_encode($properties)));
+
+
+		if ($statement->execute(array(":json" => json_encode($properties))))
+		{
+			return $db->lastInsertId("id");
+		}
+		return false;
 	}
 
 	// Edits a row
