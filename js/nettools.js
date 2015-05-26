@@ -1,3 +1,15 @@
+var notifyEl;
+
+window.onload = function()
+{
+	notifyEl = document.createElement("div");
+	notifyEl.id = "usernotifymessage";
+	notifyEl.style.display = "none";
+	notifyEl.onclick = function(){notifyEl.style.display = "none"};
+	
+	document.body.appendChild(notifyEl);
+};
+
 
 // Sends an asynchronous httpget to the specified URL, calls callback when ready with this as XMLHttpRequest
 function httpGet(url, callback)
@@ -11,8 +23,8 @@ function httpGet(url, callback)
 // Notify the user of an action on-screen
 function userNotify(msg)
 {
-	// TODO: Improve
-	alert(msg);
+	notifyEl.textContent = msg;
+	notifyEl.style.display = "block";
 }
 
 // Calls usersystem.php with the specified parameters and notifies the user of the result
