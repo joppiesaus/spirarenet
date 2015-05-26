@@ -20,7 +20,7 @@ class JsonDBObject
 		{
 			throw("Creation failed!");
 		}
-		$this->id = $i;
+		$this->id = intval($i);
 	}
 
 	public function save()
