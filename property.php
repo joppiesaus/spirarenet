@@ -4,6 +4,7 @@
 	<title>Propertyyyy</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="js/nettools.js"></script>
 </head>
 <body>
 
@@ -34,7 +35,7 @@ echo "<p>" . $jp["description"] . "</p>";
 session_start();
 if (isset($_SESSION["uid"]))
 {
-	echo "<input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"window.location='usersystem.php?action=addproperty&pid=" . $pid . "'\"/>";
+	echo "<input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
 }
 
 if (!empty($prop->json["users"]))
