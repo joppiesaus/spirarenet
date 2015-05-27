@@ -50,15 +50,23 @@ class Main
 	public static function displayProperty($prop)
 	{
 		$output = "<div class=\"property " . $prop["type"];
+
 		if (isset($prop["css"]))
 		{
-			$output .= " " . $prop["cssclass"]; // !Implement!
+			$output .= "\" style=\"" . $prop["css"] . "\"";
 		}
-		$output .= "\" alt=\"" . $prop["description"] . "\"";
+		else if (isset($prop["cssclass"]))
+		{
+			$output .= " " . $prop["cssclass"] . "\"";
+		}
+
+		$output .= "alt=\"" . $prop["description"] . "\"";
+
 		if (!empty($prop["id"]))
 		{
 			$output .= " onclick=\"propertyClick('" . $prop["id"] . "')\"";
 		}
+
 		$output .=  ">" . $prop["name"] . "</div>";
 		echo $output;
 	}
