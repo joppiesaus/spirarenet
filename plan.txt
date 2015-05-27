@@ -71,5 +71,6 @@ TODO:
 - Property checking(check if someone already has a property)
 - Select something by name!
 - Do events!
+- Image uploading!
 
 selectsize

@@ -1,5 +1,7 @@
 var notifyEl;
 
+_onloadfuncs = [];
+
 window.onload = function()
 {
 	notifyEl = document.createElement("div");
@@ -13,7 +15,10 @@ window.onload = function()
 	
 	document.body.appendChild(notifyEl);
 	
-	userNotify("Hi, I am your computer. Please accept me as your senpai. Click to dismiss me. But beware, I may bite you when you don't.");
+	for (var i = 0; i < _onloadfuncs.length; i++)
+	{
+		_onloadfuncs[i]();
+	}
 };
 
 

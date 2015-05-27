@@ -37,6 +37,7 @@ session_start();
 if (isset($_SESSION["uid"]))
 {
 	echo "<br><br><input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
+	Main::addGlobalEvents();
 }
 
 if (!empty($prop->json["users"]))

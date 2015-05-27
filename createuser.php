@@ -15,7 +15,7 @@
 	Property JSON: <?php
 	require "main.php";
 
-	echo '<textarea name="userproperties">' . json_encode(array(Property::createProperty("name", "description", "badge"))) . '</textarea>';
+	echo '<textarea name="userproperties">[]</textarea>';
 	?><!--<input type="text" name="userproperties"><br>-->
 	<br><br><input type="Submit">
 </form>

@@ -81,11 +81,27 @@ body
 	border-right: 0;
 	font-size: 20pt;
 	padding: 5px 1px 1px 12px;
+	cursor: pointer;
 }
 #usernotifymessage:hover
 {
 	background-color: rgba(228, 246, 255, 0.98);
 }
+
+#profilePictureFileUploadDialog
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 40%;
+	padding: 10px;
+	transform: translate(-50%, -50%);
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+}
+
 
 .property
 {

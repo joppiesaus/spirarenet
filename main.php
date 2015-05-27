@@ -78,6 +78,18 @@ class Main
 		$prop->load();
 		return $prop;
 	}
+
+
+	// Adds global things to a webpage, such as notifications
+	public static function addGlobalEvents()
+	{
+		// Display notification popup on load when requested
+		if (!empty($_SESSION["usernotifymessage"]))
+		{
+			echo "<script>_onloadfuncs.unshift(function(){userNotify(\"" . $_SESSION["usernotifymessage"] . "\")});</script>";
+			unset($_SESSION["usernotifymessage"]);
+		}
+	}
 }
 
 class User extends JsonDBObject

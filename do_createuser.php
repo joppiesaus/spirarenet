@@ -17,7 +17,7 @@ $user->json = array(
 				"name" => $_POST["userrealname"],
 				"password" => $_POST["userpassword"],
 				"email" => $_POST["useremail"],
-				"picture_url" => NULL,
+				"picture_url" => "img/missing.png",
 				"bio" => $_POST["userbio"]
 			),
 		// TEMP TEMP TEMP

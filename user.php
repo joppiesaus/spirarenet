@@ -4,6 +4,7 @@
 	<title>userrrr</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="js/main.js"></script>
 	<script src="js/propertynavigate.js"></script>
 </head>
 <body>
@@ -41,6 +42,14 @@ if ($user)
 		echo '<div id="uprofile_properties">';
 		Main::displayProperties($user->json["properties"]);
 		echo '</div>';
+	}
+
+	// Check if user is logged on and if the user is the same user as the page
+	session_start();
+	if ($_SESSION["uid"] == $user->id)
+	{
+		echo "<script src=\"js/profileimageupload.js\"></script>";
+		Main::addGlobalEvents();
 	}
 }
 else
