@@ -5,9 +5,15 @@ window.onload = function()
 	notifyEl = document.createElement("div");
 	notifyEl.id = "usernotifymessage";
 	notifyEl.style.display = "none";
-	notifyEl.onclick = function(){notifyEl.style.display = "none"};
+	notifyEl.onclick = function()
+	{
+		notifyEl.style.display = "none";
+		notifyEl.textContent = "Well this is awkward";
+	};
 	
 	document.body.appendChild(notifyEl);
+	
+	userNotify("Hi, I am your computer. Please accept me as your senpai. Click to dismiss me. But beware, I may bite you when you don't.");
 };
 
 

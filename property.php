@@ -4,7 +4,7 @@
 	<title>Propertyyyy</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="js/nettools.js"></script>
+	<script src="js/main.js"></script>
 </head>
 <body>
 
@@ -29,13 +29,14 @@ $jp = $prop->json["property"];
 // Todo: Do seperate CSS
 echo "<p id=\"uprofile_name\">" . $jp["name"] . "</p>";
 echo "<p>" . $jp["description"] . "</p>";
+$prop->display();
 
 // TODO: Check if user already has property, then handle it another way(e.g. remove this badge)
 
 session_start();
 if (isset($_SESSION["uid"]))
 {
-	echo "<input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
+	echo "<br><br><input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
 }
 
 if (!empty($prop->json["users"]))
