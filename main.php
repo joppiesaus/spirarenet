@@ -2,8 +2,6 @@
 
 require "dbtools.php";
 
-//require "cssGenerator.php";
-
 class JsonDBObject
 {
 	// TODO: Make this static
@@ -127,8 +125,8 @@ class Property extends JsonDBObject
 	}
 
 	// Creates a new property(json only, not the dbobj)
-	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS, additionalCssDependencies - Additional required css, but does not fit in class - usage unique and disencourged when not needed
-	public static function createProperty($name, $description, $type, $id = NULL, $css = "", $additionalCssDependencies = "")
+	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS
+	public static function createProperty($name, $description, $type, $id = NULL, $css = "")
 	{
 		$prop = array();
 		$prop["type"] = $type;
@@ -142,11 +140,6 @@ class Property extends JsonDBObject
 		if (!empty($css))
 		{
 			$prop["css"] = $css;
-
-			if (!empty($additionalCssDependencies))
-			{
-				$prop["cssadditional"] = $additionalCssDependencies;
-			}
 		}
 
 		return $prop;

@@ -51,9 +51,9 @@ Imported as class User
 			[] CSS (optional) - contents described here just stored in JSON, not in-sub object
 				[] css - the css class, *contents* of css class
 					o auto-generated classname, on page load? At least not static.
-				[] cssadditional - additional dependencies (optional)
+				/*[] cssadditional - additional dependencies (optional)
 					o for animation or something, like a rainbow
-					o should almost never be used
+					o should almost never be used*/
 				[] cssclass
 					o classname
 

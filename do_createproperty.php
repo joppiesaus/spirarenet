@@ -19,18 +19,25 @@ $prop->json = array(
 			)
 	);
 
-// CSSGENERATION!!!!!!!!!!!!
+
+$prop->create();
+
+// Generate CSS
 if (!empty($_POST["css"]))
 {
-	$prop->json["property"]["css"] = $_POST["css"];
+	$cdeps = "";
 
 	if (!empty($_POST["cssdeps"]))
 	{
-		$prop->json["property"]["cssadditional"] = $_POST["cssdeps"];
+		$cdeps = $_POST["cssdeps"];
 	}
+
+	require "cssGenerator.php";
+
+	CSSGEN::addProperty($prop, $_POST["css"], $cdeps);
 }
 
-$prop->create();
+
 
 echo "Succesfully created " . $_POST["type"] . " " . $_POST["name"] . " with id " . $prop->id . "!";
 $prop->display();
