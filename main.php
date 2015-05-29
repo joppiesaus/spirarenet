@@ -57,8 +57,12 @@ class Main
 		{
 			$output .= " " . $prop["cssclass"] . "\"";
 		}
+		else
+		{
+			$output .= "\"";
+		}
 
-		$output .= "alt=\"" . $prop["description"] . "\"";
+		$output .= " alt=\"" . $prop["description"] . "\"";
 
 		if (!empty($prop["id"]))
 		{

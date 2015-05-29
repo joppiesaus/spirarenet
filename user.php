@@ -47,7 +47,7 @@ if ($user)
 
 	// Check if user is logged on and if the user is the same user as the page
 	session_start();
-	if ($_SESSION["uid"] == $user->id)
+	if (isset($_SESSION["uid"]) && $_SESSION["uid"] == $user->id)
 	{
 		echo "<script src=\"js/profileimageupload.js\"></script>";
 		Main::addGlobalEvents();
