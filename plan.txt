@@ -24,46 +24,54 @@ Let's see if I can get this to something
 	o A tag is something you like, like cooking
 	o And a badge is something you "earn" or "am", like being a teacher or a student
 
+
+
+
+- Table of user indexes(ind_user)
+	[] id -> users[id]
+	[] name -> username
+
 - Table of users
 	[]	id
-	[]	json
+	[]	data
 		[] profile
 			[] username
 			[] name
-			[] password(duh)	
+			[] password
+				o SHA512 one-way encrypted
 			[] email
 			[] picture_url
 			[] bio
-		[] properties
-			(see property in table properties)
+		[] properties (optional)
+			o here you can give this user additional properties that are not linked anywhere.
 Imported as class User
+
+- Table of users and properties linkage(usr_prop)
+	[] uid
+	[] pid
+
+	- if you add a property to a user, you just check if it already exist
+	- add a relation for easy deleting
+	- you can easially select certain stuff
 
 
 - Table of properties
 	[] id
-	[] json
-		[] users(id's)
+	[] data
 		[] property - this is what gets saved on someone's profile
-			[] type(tag or badge)
-			[] id(optional)
-			[] name
-			[] description
-			[] CSS (optional) - contents described here just stored in JSON, not in-sub object
+		[] type(tag or badge)
+		[] name
+		[] description
+		[] CSS (optional) - contents described here just stored in JSON, not in-sub object
 				[] css - the css class, *contents* of css class
 					o auto-generated classname, on page load? At least not static.
-				/*[] cssadditional - additional dependencies (optional)
-					o for animation or something, like a rainbow
-					o should almost never be used*/
 				[] cssclass
 					o classname
-
-- Table of events
-	[] id
-	[] json
-		[] badge
-		[] ???
  
 Imported as class Property
+
+
+
 
 TODO:
 - FIX CSS GENERATION
