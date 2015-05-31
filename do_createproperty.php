@@ -9,14 +9,12 @@ if (empty($_POST))
 require "main.php";
 
 $prop = new Property;
-$prop->json = array(
-		"users" => array(),
-		"property" => array(
-				"id" => NULL,
-				"type" => $_POST["type"],
-				"name" => $_POST["name"],
-				"description" => $_POST["description"],
-			)
+$prop->data = array(
+			"id" => NULL,
+			"type" => $_POST["type"],
+			"name" => $_POST["name"],
+			"description" => $_POST["description"],
+		)
 	);
 
 
@@ -37,10 +35,11 @@ if (!empty($_POST["css"]))
 	CSSGEN::addProperty($prop, $_POST["css"], $cdeps);
 }
 
+// Add notification
+session_start();
+$_SESSION["usernotifymessage"] = "Succesfully created " . $_POST["type"] . " " . $_POST["name"] . "!";
 
-
-echo "Succesfully created " . $_POST["type"] . " " . $_POST["name"] . " with id " . $prop->id . "!";
-$prop->display();
-
+// Redirect to property
+header("Location:property.php?id=". $prop->id);
 
 ?>

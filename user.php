@@ -29,7 +29,7 @@ $user->id = $uid;
 $user->load();
 if ($user)
 {
-	$userj = $user->json["profile"];
+	$userj = $user->data["profile"];
 	$name = $userj["name"];
 
 	// user exists, print
@@ -38,10 +38,10 @@ if ($user)
 	echo '<p id="uprofile_username">' . $userj["username"] . '</p>';
 	echo '<p id="uprofile_bio">' . $userj["bio"] . '</p>';
 
-	if (!empty($user->json["properties"]))
+	if (!empty($user->data["properties"]))
 	{
 		echo '<div id="uprofile_properties">';
-		Main::displayProperties($user->json["properties"]);
+		Main::displayProperties($user->data["properties"]);
 		echo '</div>';
 	}
 

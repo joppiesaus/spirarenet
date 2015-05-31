@@ -24,7 +24,7 @@ $pid = intval($_GET["id"]);
 require "main.php";
 
 $prop = Main::loadProperty($pid);
-$jp = $prop->json["property"];
+$jp = $prop->data;
 
 
 // Todo: Do seperate CSS
@@ -38,21 +38,21 @@ session_start();
 if (isset($_SESSION["uid"]))
 {
 	echo "<br><br><input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
-	Main::addGlobalEvents();
 }
+Main::addGlobalEvents();
 
-if (!empty($prop->json["users"]))
+if (!empty($prop->data["users"]))
 {
 	echo "<br><p>Users:</p>";
 	
-	foreach ($prop->json["users"] as $uid)
+	foreach ($prop->getAllUsers() as $uid)
 	{
 		$user = Main::loadUser($uid);
-		if (!$user)
+		/*if (!$user)
 		{
 			continue;
-		}
-		$up = $user->json["profile"];
+		}*/
+		$up = $user->data["profile"];
 		echo "<div class=\"p_userpreview\"><a href=\"user.php?id=" . $uid . "\"><p>" . $up["name"] . "</p><img src=\"" . $up["picture_url"] . "\"></a></div>";
 	}
 }

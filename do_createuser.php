@@ -10,8 +10,7 @@ require "main.php";
 
 $user = new User;
 
-// TODO: properties
-$user->json = array(
+$user->data = array(
 		"profile" => array(
 				"username" => $_POST["username"], 
 				"name" => $_POST["userrealname"],
@@ -19,10 +18,14 @@ $user->json = array(
 				"email" => $_POST["useremail"],
 				"picture_url" => "img/missing.png",
 				"bio" => $_POST["userbio"]
-			),
-		// TEMP TEMP TEMP
-		"properties" => json_decode($_POST["userproperties"])
+			)
 	);
+
+$props = json_decode($_POST["userproperties"]);
+if (!empty($props))
+{
+	$user->data["properties"] = $props;
+}
 
 $user->create();
 

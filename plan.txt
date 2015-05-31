@@ -21,13 +21,13 @@ Let's see if I can get this to something
 - Or you can just send messages, based on people or property
 
 0  tags and badges, choose between tag and badge
-	o A tag is something you like, like cooking
+	o A tag is something you like, like cookingS
 	o And a badge is something you "earn" or "am", like being a teacher or a student
 
 
 
 
-- Table of user indexes(ind_user)
+- Table of user indexes(ind_users)
 	[] id -> users[id]
 	[] name -> username
 
@@ -74,16 +74,8 @@ Imported as class Property
 
 
 TODO:
+- Error checking!
 - FIX CSS GENERATION
-- Create relation tables
-- Make in user json additional properties, destroy double-data and put in table
-- Create username + id table
-- Have fun
+- Events!
 
-- Make everything pretty
-- Property checking(check if someone already has a property)
-- Select something by name!
-- Do events!
-- Image uploading!
-
-selectsize
+selectsize?

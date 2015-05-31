@@ -8,12 +8,12 @@ class JsonDBObject
 	protected $TABLE = "Oops a developer was sleeping on its keyboard while it should be overriding JsonDBObject";
 
 	public $id;
-	public $json;
+	public $data;
 
 	// Creates the object, 
 	public function create()
 	{
-		$i = DB::insert($this->TABLE, $this->json);
+		$i = DB::insert($this->TABLE, $this->data);
 		if (!$i)
 		{
 			throw("Creation failed!");
@@ -23,12 +23,18 @@ class JsonDBObject
 
 	public function save()
 	{
-		DB::edit($this->TABLE, $this->id, $this->json);
+		DB::edit($this->TABLE, $this->id, $this->data);
 	}
 
 	public function load()
 	{
-		$this->json = json_decode(DB::selectById($this->TABLE, $this->id)["json"], true);
+		$this->data = json_decode(DB::selectById($this->TABLE, $this->id)["data"], true);
+	}
+
+	public function loadById($id)
+	{
+		$this->id = $id;
+		$this->load();
 	}
 }
 
@@ -44,8 +50,8 @@ class Main
 		}
 	}
 
-	// Displays the property on the page. Make sure you included style.css. prop is propery json
-	public static function displayProperty($prop)
+	// Displays the property on the page. Make sure you included style.css. prop is propery json. If id is not 0, it'll create a link to the property action
+	public static function displayProperty($prop, $id = 0)
 	{
 		$output = "<div class=\"property " . $prop["type"];
 
@@ -64,9 +70,9 @@ class Main
 
 		$output .= " alt=\"" . $prop["description"] . "\"";
 
-		if (!empty($prop["id"]))
+		if (!empty($id))
 		{
-			$output .= " onclick=\"propertyClick('" . $prop["id"] . "')\"";
+			$output .= " onclick=\"propertyClick('" . $id . "')\"";
 		}
 
 		$output .=  ">" . $prop["name"] . "</div>";
@@ -106,27 +112,76 @@ class User extends JsonDBObject
 {
 	protected $TABLE = "users";
 
+	public static function getUserIDByName($name)
+	{
+		$result = DB::connectToDb()->query("SELECT id FROM ind_users WHERE name=\"" . $name . "\"")->fetch(PDO::FETCH_ASSOC);
+		if ($result)
+		{
+			return $result["id"];
+		}
+		return false;
+	}
+
+	public function loadByName($name)
+	{
+		$this->id = self::getUserIDByName($name);
+		if (!$this->id)
+		{
+			throw "Error: User probably doesn't exist!";
+		}
+		$this->load();
+	}
+
+	public function create()
+	{
+		parent::create();
+		// TODO: Implement indexing
+
+		$db = DB::connectToDb();
+		$statement = $db->prepare("INSERT INTO ind_users(id,name) VALUES(:id,:name)");
+		if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["name"])))
+		{
+			throw "Error, user probably already exists!";
+			return false;
+		}
+		return true;
+	}
+
 	// Adds and links an property(JsonDBObject) to this user.
 	public function addProperty(&$prop)
 	{
 		// TODO: Check if the user already has property
-		array_push($this->json["properties"], $prop->json["property"]);
+		array_push($this->data["properties"], $prop->data["property"]);
 
 		$this->save();
 		$prop->addUser($this->id);
+	}
+
+	// Displays all properties of this user
+	public function displayAllProperties()
+	{
+		foreach (getAllProperties() as $prop)
+		{
+			$prop->display();
+		}
+	}
+
+	// Returns if the user already has a property with the id $pid
+	public function hasProperty($pid)
+	{
+
+	}
+
+	// Returns an array of all property id's this user has
+	public function getAllProperties()
+	{
+
 	}
 }
 
 class Property extends JsonDBObject
 {
 	protected $TABLE = "properties";
-
-	function create()
-	{
-		parent::create();
-		$this->json["property"]["id"] = $this->id;
-		$this->save();
-	}
 
 	// Creates a new property(json only, not the dbobj)
 	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS
@@ -152,14 +207,26 @@ class Property extends JsonDBObject
 	// Adds an user to this property, doesn't link
 	public function addUser($uid)
 	{
-		array_push($this->json["users"], $uid);
+		// TODO: rewrite
+		array_push($this->data["users"], $uid);
 		$this->save();
 	}
 
-	
+	// Returns if the property already has a user with the id $uid
+	public function hasUser($uid)
+	{
+
+	}
+
+	// Returns an array of all user id's this property has
+	public function getAllUsers()
+	{
+
+	}
+
 	public function display()
 	{
-		Main::displayProperty($this->json["property"]);
+		Main::displayProperty($this->data, $this->id);
 	}
 }
 

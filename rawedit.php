@@ -32,7 +32,7 @@ include "dbtools.php";
 $id = $_GET["id"];
 $table = $_GET["table"];
 
-$json = DB::selectById($table, $id)["json"];
+$json = DB::selectById($table, $id)["data"];
 
 echo "<form action=\"do_rawedit.php\" method=\"post\"><table>";
 

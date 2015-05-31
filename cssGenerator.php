@@ -21,10 +21,10 @@ class CSSGEN
 			$readsize = filesize(CSSGEN_PROPPATH);
 		}
 		$f = fopen(CSSGEN_PROPPATH, "w+");
-		$arr = explode(CSSGEN_DEPSPOINTERSTR, fread($f, $readsize));
+		$arr = explode(CSSGEN_DEPSPOINTERSTR, fread($f, $readsize), 2);
 
-		$class = "property-" . $property->json["property"]["id"];
-		$property->json["property"]["cssclass"] = $class;
+		$class = "property-" . $property->id;
+		$property->data["cssclass"] = $class;
 		$arr[0] .= "." . $class . "{" . $css . "}";
 
 		$property->save();

@@ -12,11 +12,7 @@
 	Password: <input type="password" name="userpassword"><br>
 	Email: <input type="text" name="useremail"><br>
 	Bio: <textarea rows="20" cols="50" name="userbio"></textarea><br>
-	Property JSON: <?php
-	require "main.php";
-
-	echo '<textarea name="userproperties">[]</textarea>';
-	?><!--<input type="text" name="userproperties"><br>-->
+	Property JSON: <textarea name="userproperties">[]</textarea>
 	<br><br><input type="Submit">
 </form>
 

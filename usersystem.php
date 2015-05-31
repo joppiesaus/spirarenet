@@ -35,14 +35,23 @@ switch ($_GET["action"])
 		}
 
 		$user = Main::loadUser($uid);
+
+		if ($user->hasProperty($pid))
+		{
+			echo "You already have this property!";
+			exit;
+		}
+
 		$prop = Main::loadProperty($pid);
 		$user->addProperty($prop);
 
-		echo "Succesfully added " . $prop->json["property"]["type"] . " " . $prop->json["property"]["name"] . " to your profile, " . $user->json["profile"]["name"] . "!";
+		echo "Succesfully added " . $prop->data["type"] . " " . $prop->data["name"] . " to your profile, " . $user->data["profile"]["name"] . "!";
 
 		break;
 
 	case "uploadprofilepic":
+
+		// TODO: Delete old picture if not needed
 
 		// TODO: do from location where the user came from
 		header("Location:user.php?id=" . $uid);
@@ -70,12 +79,12 @@ switch ($_GET["action"])
 
 		if (!move_uploaded_file($_FILES["uploadimg"]["tmp_name"], $target_file))
 		{
-			$_SESSION["usernotifymessage"] = "Unexpected error when saving image. Sorry.";
+			$_SESSION["usernotifymessage"] = "Unexpected error when saving image. :(";
 			exit;
 		}
 
 		$user = Main::loadUser($uid);
-		$user->json["profile"]["picture_url"] = $target_file;
+		$user->data["profile"]["picture_url"] = $target_file;
 		$user->save();
 
 		$_SESSION["usernotifymessage"] = "Your image was succesfully uploaded!";
