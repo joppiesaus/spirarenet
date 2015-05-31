@@ -139,7 +139,7 @@ class User extends JsonDBObject
 
 		$db = DB::connectToDb();
 		$statement = $db->prepare("INSERT INTO ind_users(id,name) VALUES(:id,:name)");
-		if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["name"])))
+		if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["username"])))
 		{
 			throw "Error, user probably already exists!";
 			return false;
@@ -148,14 +148,14 @@ class User extends JsonDBObject
 	}
 
 	// Adds and links an property(JsonDBObject) to this user.
-	public function addProperty(&$prop)
+	/*public function addProperty(&$prop)
 	{
 		// TODO: Check if the user already has property
 		array_push($this->data["properties"], $prop->data["property"]);
 
 		$this->save();
 		$prop->addUser($this->id);
-	}
+	}*/
 
 	// Displays all properties of this user
 	public function displayAllProperties()
@@ -164,6 +164,12 @@ class User extends JsonDBObject
 		{
 			$prop->display();
 		}
+	}
+
+	// Adds and links a property to this user
+	public function addProperty($pid)
+	{
+		DB::linktable_insert("user_prop", "uid", "pid", $this->id, $pid);
 	}
 
 	// Returns if the user already has a property with the id $pid
@@ -204,12 +210,10 @@ class Property extends JsonDBObject
 		return $prop;
 	}
 
-	// Adds an user to this property, doesn't link
+	// Adds and links an user to this property
 	public function addUser($uid)
 	{
-		// TODO: rewrite
-		array_push($this->data["users"], $uid);
-		$this->save();
+		DB::linktable_insert("user_prop", "uid", "pid", $uid, $this->id);
 	}
 
 	// Returns if the property already has a user with the id $uid

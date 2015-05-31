@@ -29,6 +29,10 @@ if (!empty($props))
 
 $user->create();
 
+session_start();
+$_SESSION["uid"] = $user->id;
+$_SESSION["usernotifymessage"] = "Welcome to your new profile, " . $user->data["profile"]["name"] . "!";
+
 header("Location:user.php?id=" . $user->id);
 
 ?>

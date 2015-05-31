@@ -43,7 +43,7 @@ switch ($_GET["action"])
 		}
 
 		$prop = Main::loadProperty($pid);
-		$user->addProperty($prop);
+		$user->addProperty($pid);
 
 		echo "Succesfully added " . $prop->data["type"] . " " . $prop->data["name"] . " to your profile, " . $user->data["profile"]["name"] . "!";
 

@@ -10,12 +10,11 @@ require "main.php";
 
 $prop = new Property;
 $prop->data = array(
-			"id" => NULL,
-			"type" => $_POST["type"],
-			"name" => $_POST["name"],
-			"description" => $_POST["description"],
-		)
-	);
+		"id" => NULL,
+		"type" => $_POST["type"],
+		"name" => $_POST["name"],
+		"description" => $_POST["description"]
+);
 
 
 $prop->create();

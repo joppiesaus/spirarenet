@@ -7,7 +7,7 @@
 <body>
 
 <form action="do_login.php" method="post">
-	Name: <input type="text" name="name"><br>
+	Username: <input type="text" name="name"><br>
 	Password: <input type="password" name="password">
 	<br><br><input type="Submit">
 </form>
