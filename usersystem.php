@@ -51,8 +51,6 @@ switch ($_GET["action"])
 
 	case "uploadprofilepic":
 
-		// TODO: Delete old picture if not needed
-
 		// TODO: do from location where the user came from
 		header("Location:user.php?id=" . $uid);
 		$target_file = "img/user/profilepic-" . $uid . "." . end(explode(".", $_FILES["uploadimg"]["name"]));
@@ -84,6 +82,13 @@ switch ($_GET["action"])
 		}
 
 		$user = Main::loadUser($uid);
+
+		// Delete old picture if not needed
+		if ($user->data["profile"]["picture_url"] != $target_file && $user->data["profile"]["picture_url"] != "img/missing.png")
+		{
+			unlink($user->data["profile"]["picture_url"]);
+		}
+
 		$user->data["profile"]["picture_url"] = $target_file;
 		$user->save();
 
