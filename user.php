@@ -38,12 +38,23 @@ if ($user)
 	echo '<p id="uprofile_username">' . $userj["username"] . '</p>';
 	echo '<p id="uprofile_bio">' . $userj["bio"] . '</p>';
 
+	echo '<div id="uprofile_properties">';
+
+	$props = $user->getAllProperties();
+
+	for ($i = 0; $i < count($props); $i++)
+	{
+		$prop = Main::loadProperty($props[$i]);
+		$prop->display();
+	}
+
 	if (!empty($user->data["properties"]))
 	{
 		echo '<div id="uprofile_properties">';
 		Main::displayProperties($user->data["properties"]);
-		echo '</div>';
 	}
+
+	echo '</div>';
 
 	// Check if user is logged on and if the user is the same user as the page
 	session_start();

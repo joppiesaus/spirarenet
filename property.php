@@ -41,11 +41,16 @@ if (isset($_SESSION["uid"]))
 }
 Main::addGlobalEvents();
 
-if (!empty($prop->data["users"]))
+$users = $prop->getAllUsers();
+if (empty($users))
+{
+	echo "<br><br>Nobody currently has this " . $jp["type"] . ".";
+}
+else
 {
 	echo "<br><p>Users:</p>";
-	
-	foreach ($prop->getAllUsers() as $uid)
+
+	foreach ($users as $uid)
 	{
 		$user = Main::loadUser($uid);
 		/*if (!$user)
@@ -54,7 +59,7 @@ if (!empty($prop->data["users"]))
 		}*/
 		$up = $user->data["profile"];
 		echo "<div class=\"p_userpreview\"><a href=\"user.php?id=" . $uid . "\"><p>" . $up["name"] . "</p><img src=\"" . $up["picture_url"] . "\"></a></div>";
-	}
+}
 }
 
 ?>

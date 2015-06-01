@@ -82,7 +82,7 @@ class Main
 	public static function loadUser($id)
 	{
 		$user = new User;
-		$user->id = intval($id);
+		$user->id = $id;
 		$user->load();
 		return $user;
 	}
@@ -90,7 +90,7 @@ class Main
 	public static function loadProperty($id)
 	{
 		$prop = new Property;
-		$prop->id = intval($id);
+		$prop->id = $id;
 		$prop->load();
 		return $prop;
 	}
@@ -135,8 +135,8 @@ class User extends JsonDBObject
 	public function create()
 	{
 		parent::create();
-		// TODO: Implement indexing
 
+		// index
 		$db = DB::connectToDb();
 		$statement = $db->prepare("INSERT INTO ind_users(id,name) VALUES(:id,:name)");
 		if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["username"])))
@@ -175,13 +175,19 @@ class User extends JsonDBObject
 	// Returns if the user already has a property with the id $pid
 	public function hasProperty($pid)
 	{
-
+		return (DB::connectToDb()->query("SELECT * FROM user_prop WHERE uid=" . $this->id . " AND pid=" . $pid)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
 	// Returns an array of all property id's this user has
 	public function getAllProperties()
 	{
-
+		$result = DB::connectToDb()->query("SELECT pid FROM user_prop WHERE uid=" . $this->id)->fetchAll(PDO::FETCH_ASSOC);
+		$arr = array();
+		for ($i = 0; $i < count($result); $i++)
+		{
+			$arr[$i] = $result[$i]["pid"];
+		}
+		return $arr;
 	}
 }
 
@@ -219,13 +225,19 @@ class Property extends JsonDBObject
 	// Returns if the property already has a user with the id $uid
 	public function hasUser($uid)
 	{
-
+		return (DB::connectToDb()->query("SELECT * FROM user_prop WHERE pid=" . $this->id . " AND uid=" . $uid)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
 	// Returns an array of all user id's this property has
 	public function getAllUsers()
 	{
-
+		$result = DB::connectToDb()->query("SELECT uid FROM user_prop WHERE pid=" . $this->id)->fetchAll(PDO::FETCH_ASSOC);
+		$arr = array();
+		for ($i = 0; $i < count($result); $i++)
+		{
+			$arr[$i] = $result[$i]["uid"];
+		}
+		return $arr;
 	}
 
 	public function display()
