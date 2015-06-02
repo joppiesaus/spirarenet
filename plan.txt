@@ -70,7 +70,17 @@ Imported as class User
  
 Imported as class Property
 
+- Table of events
+	[] id
+	[] data(json)
+		[] name
+		[] description
+		[] status
+		[] execution_time
 
+- Table of events and property linking
+	[] eid
+	[] pid
 
 
 TODO:

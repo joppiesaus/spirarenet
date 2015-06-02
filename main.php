@@ -246,4 +246,9 @@ class Property extends JsonDBObject
 	}
 }
 
+class Event
+{
+	protected $TABLE = "events";
+}
+
 ?>
