@@ -24,9 +24,7 @@ $uid = intval($_GET["id"]);
 
 require "main.php";
 
-$user = new User;
-$user->id = $uid;
-$user->load();
+$user = new User($uid);
 if ($user)
 {
 	$userj = $user->data["profile"];
@@ -44,7 +42,7 @@ if ($user)
 
 	for ($i = 0; $i < count($props); $i++)
 	{
-		$prop = Main::loadProperty($props[$i]);
+		$prop = new Property($props[$i]);
 		$prop->display();
 	}
 

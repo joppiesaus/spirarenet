@@ -34,7 +34,7 @@ switch ($_GET["action"])
 			exit;
 		}
 
-		$user = Main::loadUser($uid);
+		$user = new User($uid);
 
 		if ($user->hasProperty($pid))
 		{
@@ -42,7 +42,7 @@ switch ($_GET["action"])
 			exit;
 		}
 
-		$prop = Main::loadProperty($pid);
+		$prop = new Property($pid);
 		$user->addProperty($pid);
 
 		echo "Succesfully added " . $prop->data["type"] . " " . $prop->data["name"] . " to your profile, " . $user->data["profile"]["name"] . "!";
@@ -81,7 +81,7 @@ switch ($_GET["action"])
 			exit;
 		}
 
-		$user = Main::loadUser($uid);
+		$user = new User($uid);
 
 		// Delete old picture if not needed
 		if ($user->data["profile"]["picture_url"] != $target_file && $user->data["profile"]["picture_url"] != "img/missing.png")

@@ -4,6 +4,16 @@ require "dbtools.php";
 
 class JsonDBObject
 {
+	// If id is not 0, instance will set id and load
+	function __construct($id = 0)
+	{
+		if (!empty($id))
+		{
+			$this->id = $id;
+			$this->load();
+		}
+	}
+
 	// TODO: Make this static
 	protected $TABLE = "Oops a developer was sleeping on its keyboard while it should be overriding JsonDBObject";
 
@@ -29,12 +39,6 @@ class JsonDBObject
 	public function load()
 	{
 		$this->data = json_decode(DB::selectById($this->TABLE, $this->id)["data"], true);
-	}
-
-	public function loadById($id)
-	{
-		$this->id = $id;
-		$this->load();
 	}
 }
 
@@ -78,23 +82,6 @@ class Main
 		$output .=  ">" . $prop["name"] . "</div>";
 		echo $output;
 	}
-
-	public static function loadUser($id)
-	{
-		$user = new User;
-		$user->id = $id;
-		$user->load();
-		return $user;
-	}
-
-	public static function loadProperty($id)
-	{
-		$prop = new Property;
-		$prop->id = $id;
-		$prop->load();
-		return $prop;
-	}
-
 
 	// Adds global things to a webpage, such as notifications
 	public static function addGlobalEvents()

@@ -76,7 +76,7 @@ Imported as class Property
 		[] name
 		[] description
 		[] status
-		[] execution_time
+		[] scheduled_time
 
 - Table of events and property linking
 	[] eid
@@ -84,8 +84,11 @@ Imported as class Property
 
 
 TODO:
+- Make code pretty!
 - Error checking!
 - FIX CSS GENERATION
 - Events!
+- Get rid of css generator?
+- property additional html?
 
 selectsize?

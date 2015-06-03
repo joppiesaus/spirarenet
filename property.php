@@ -23,7 +23,7 @@ $pid = intval($_GET["id"]);
 
 require "main.php";
 
-$prop = Main::loadProperty($pid);
+$prop = new Property($pid);
 $jp = $prop->data;
 
 
@@ -52,7 +52,7 @@ else
 
 	foreach ($users as $uid)
 	{
-		$user = Main::loadUser($uid);
+		$user = new User($uid);
 		/*if (!$user)
 		{
 			continue;

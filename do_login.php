@@ -15,8 +15,7 @@ if (!$uid)
 	exit;
 }
 
-$user = new User;
-$user->loadById($uid);
+$user = new User($uid);
 
 if (hash("sha512", $_POST["password"]) != $user->data["profile"]["password"])
 {
