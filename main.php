@@ -219,12 +219,26 @@ class Property extends JsonDBObject
 	public function getAllUsers()
 	{
 		$result = DB::connectToDb()->query("SELECT uid FROM user_prop WHERE pid=" . $this->id)->fetchAll(PDO::FETCH_ASSOC);
-		$arr = array();
-		for ($i = 0; $i < count($result); $i++)
+		
+		if( $result )
 		{
-			$arr[$i] = $result[$i]["uid"];
+			$arr = [];
+
+			foreach( $result AS $row )
+			{	
+				$arr[] = $row["uid"];
+			}
+
+			return $arr;
 		}
-		return $arr;
+
+
+		// $arr = array();
+		// for ($i = 0; $i < count($result); $i++)
+		// {
+		// 	$arr[$i] = $result[$i]["uid"];
+		// }
+		// return $arr;
 	}
 
 	public function display()
