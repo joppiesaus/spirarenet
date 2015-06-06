@@ -23,6 +23,14 @@ class DB
 		}
 	}
 
+	// Returns the object based on id. If the object doesn't exist, it'll return false.
+	public static function selectById($table, $id)
+	{
+		return self::connectToDb()->query("SELECT * FROM " . $table . " WHERE id=" . $id)->fetch(PDO::FETCH_ASSOC);
+	}
+
+
+
 	// Inserts two values in a linktable
 	public static function linktable_insert($table, $key1, $key2, $v1, $v2)
 	{
@@ -42,27 +50,22 @@ class DB
 		(self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
-	// Returns the object based on id. If the object doesn't exist, it'll return false.
-	public static function selectById($table, $id)
-	{
-		return self::connectToDb()->query("SELECT * FROM " . $table . " WHERE id=" . $id)->fetch(PDO::FETCH_ASSOC);
-	}
-
 	// Returns all target ids from a linktable
 	public static function linktable_getAllIds($table, $wantKey, $selKey, $selVal)
 	{
 		$result = self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . "=" . $selVal)->fetchAll(PDO::FETCH_ASSOC);
 
+		// Thanks Tim
 		$ids = [];
 
 		if ($result)
 		{
-			foreach ($result AS $row)
+			foreach ($result as $row)
 			{
 				$ids[] = $row[$wantKey];
 			}
 		}
-		
+
 		return $ids;
 	} 
 }

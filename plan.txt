@@ -34,6 +34,9 @@ Let's see if I can get this to something
 - Table of users
 	[]	id
 	[]	data
+		[] admin(optional)
+			o if this is set, you're an admin, which means that you can do anything
+			  when you login, session variable uadmin will be set to true
 		[] profile
 			[] username
 			[] name
@@ -45,6 +48,7 @@ Let's see if I can get this to something
 		[] properties (optional)
 			o here you can give this user additional properties that are not linked anywhere.
 Imported as class User
+
 
 - Table of users and properties linkage(usr_prop)
 	[] uid
@@ -78,11 +82,15 @@ Imported as class Property
 		[] status
 		[] scheduled_time
 
-- Table of events and property linking(evnt_prop)
+- Table of event and property linking(evnt_prop)
 	[] eid
 	[] pid
 
-
+- Table of event and organisator linking(evnt_organisator)
+	[] eid
+	[] uid
+	- organisators have access to the event to edit or modify it
+	if you create an event, you're automatically an organisator
 
 TODO:
 - Make code pretty!

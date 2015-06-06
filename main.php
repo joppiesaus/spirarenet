@@ -100,6 +100,12 @@ class User extends JsonDBObject
 {
 	protected $TABLE = "users";
 
+	// Returns true if the target user is an admin
+	/*public static function isUserAdmin($uid)
+	{
+		return (DB::connectToDb()->query("SELECT * FROM useradmins WHERE id=" . $uid)->fetch(PDO::FETCH_ASSOC) != FALSE);
+	}*/
+
 	// TODO: Make a mapper of this too, since this will not be the only index table
 	public static function getUserIDByName($name)
 	{
@@ -172,6 +178,12 @@ class User extends JsonDBObject
 	{
 		return DB::linktable_getAllIds("user_prop", "pid", "uid", $this->id);
 	}
+
+	// Returns true if this user is an admin
+	/*public function isAdmin()
+	{
+		return self::isUserAdmin($this->id);
+	}*/
 }
 
 class Property extends JsonDBObject
@@ -213,6 +225,13 @@ class Property extends JsonDBObject
 		return DB::linktable_getAllIds("user_prop", "uid", "pid", $this->id);
 	}
 
+	// Returns an array of all event id's this property has
+	public function getAllEvents()
+	{
+		return DB::linktable_getAllIds("evnt_prop", "eid", "pid", $this->id);
+	}
+
+	// Displays this property on the page
 	public function display()
 	{
 		Main::displayProperty($this->data, $this->id);
@@ -223,9 +242,22 @@ class Event extends JsonDBObject
 {
 	protected $TABLE = "events";
 
+	// returns an array of property id's of this event
 	public function getAllProperties()
 	{
 		return DB::linktable_getAllIds("evnt_prop", "pid", "eid", $this->id); 
+	}
+
+	// Returns true if the user is an organisator of this event
+	public function isOrganisator($uid)
+	{
+		return DB::linktable_has("evnt_organisator", "uid", "eid", $this->id);
+	}
+
+	// Adds an organisator to this event. Returns false on fail
+	public function addOrganisator($uid)
+	{
+		return DB::linktable_insert("evnt_organisator", "eid", "uid", $this->id, $uid);
 	}
 }
 

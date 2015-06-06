@@ -48,6 +48,12 @@ else
 	echo "This event doesn't exist :/";
 }
 
+session_start();
+if (isset($_SESSION["uid"]))
+{
+	// TODO: Add property adding
+}
+
 ?>
 
 </div>
