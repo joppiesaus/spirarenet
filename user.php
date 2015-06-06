@@ -38,21 +38,21 @@ if ($user)
 
 	echo '<div id="uprofile_properties">';
 
-	$props = $user->getAllProperties();
-
-	for ($i = 0; $i < count($props); $i++)
-	{
-		$prop = new Property($props[$i]);
-		$prop->display();
-	}
-
 	if (!empty($user->data["properties"]))
 	{
-		echo '<div id="uprofile_properties">';
 		Main::displayProperties($user->data["properties"]);
 	}
 
+	$props = $user->getAllProperties();
+
+	foreach ($props as $pid)
+	{
+		$prop = new Property($pid);
+		$prop->display();
+	}
+
 	echo '</div>';
+
 
 	// Check if user is logged on and if the user is the same user as the page
 	session_start();

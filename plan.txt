@@ -78,9 +78,10 @@ Imported as class Property
 		[] status
 		[] scheduled_time
 
-- Table of events and property linking
+- Table of events and property linking(evnt_prop)
 	[] eid
 	[] pid
+
 
 
 TODO:

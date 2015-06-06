@@ -164,13 +164,13 @@ class User extends JsonDBObject
 	// Returns if the user already has a property with the id $pid
 	public function hasProperty($pid)
 	{
-		return DB::linktable_has($this->TABLE, "pid", "uid", $pid, $this->id);
+		return DB::linktable_has("user_prop", "pid", "uid", $pid, $this->id);
 	}
 
 	// Returns an array of all property id's this user has
 	public function getAllProperties()
 	{
-		return DB::linktable_getAllIds($this->TABLE, "pid", "uid", $this->id);
+		return DB::linktable_getAllIds("user_prop", "pid", "uid", $this->id);
 	}
 }
 
@@ -204,13 +204,13 @@ class Property extends JsonDBObject
 	// Returns if the property already has a user with the id $uid
 	public function hasUser($uid)
 	{
-		return DB::linktable_has($this->TABLE, "uid", "pid", $uid, $this->id);
+		return DB::linktable_has("user_prop", "uid", "pid", $uid, $this->id);
 	}
 
 	// Returns an array of all user id's this property has
 	public function getAllUsers()
 	{
-		return DB::linktable_getAllIds($this->TABLE, "uid", "pid", $this->id);
+		return DB::linktable_getAllIds("user_prop", "uid", "pid", $this->id);
 	}
 
 	public function display()
@@ -219,9 +219,14 @@ class Property extends JsonDBObject
 	}
 }
 
-class Event
+class Event extends JsonDBObject
 {
 	protected $TABLE = "events";
+
+	public function getAllProperties()
+	{
+		return DB::linktable_getAllIds("evnt_prop", "pid", "eid", $this->id); 
+	}
 }
 
 ?>

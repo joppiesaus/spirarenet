@@ -23,8 +23,30 @@ if (!isset($_GET["id"]))
 $eid = intval($_GET["id"]);
 
 require "main.php";
-s
 
+$evnt = new Event($eid);
+
+if ($evnt)
+{
+	echo '<p id="uprofile_name">' . $evnt->data["title"]. '</p>';
+	echo '<p id="uprofile_bio">' . $evnt->data["description"] . '</p>';
+
+	echo '<div id="uprofile_properties">';
+
+	$props = $evnt->getAllProperties();
+
+	foreach ($props as $pid)
+	{
+		$prop = new Property($pid);
+		$prop->display();
+	}
+
+	echo '</div>';
+}
+else
+{
+	echo "This event doesn't exist :/";
+}
 
 ?>
 

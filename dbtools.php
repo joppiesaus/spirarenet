@@ -53,18 +53,17 @@ class DB
 	{
 		$result = self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . "=" . $selVal)->fetchAll(PDO::FETCH_ASSOC);
 
+		$ids = [];
+
 		if ($result)
 		{
-			$ids = [];
-
 			foreach ($result AS $row)
 			{
 				$ids[] = $row[$wantKey];
 			}
-
-			return $ids;
 		}
-		return false;
+		
+		return $ids;
 	} 
 }
 
