@@ -1,6 +1,6 @@
 <?php
 
-define("DBSERVER", "localhost");
+define("DBHOST", "localhost");
 define("DBUSER", "root");
 define("DBPASSWORD", "");
 
@@ -9,22 +9,37 @@ class DB
 	// Returns a new PDO database connection to the super awesome database called spirarenet
 	public static function connectToDb()
 	{
-		$db = new PDO("mysql:host=" . DBSERVER . ";dbname=spirarenet", DBUSER, DBPASSWORD);
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		return $db;
+		try
+		{
+			$db = new PDO("mysql:host=" . DBHOST . ";dbname=spirarenet", DBUSER, DBPASSWORD);
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			return $db;
+		}
+		catch (PDOException $error)
+		{
+			echo "<h1>D:</h1><p><b>Owh crap.</b> Something went horribly wrong. If you see the sweating computer monkeys, give them this:</p><pre>" .
+				 $error->getMessage() .
+				 "</pre>";
+		}
 	}
 
 	// Inserts two values in a linktable
-	public static function linktable_insert($table, $value1name, $value2name, $value1, $value2)
+	public static function linktable_insert($table, $key1, $key2, $v1, $v2)
 	{
 		// This code 2sad4me ;_;
-		$label1 = ":" . $value1name;
-		$label2 = ":" . $value2name;
+		$label1 = ":" . $key1;
+		$label2 = ":" . $key2;
 
-		$statement = self::connectToDb()->prepare("INSERT INTO " . $table . "(" . $value1name . "," . $value2name . 
+		$statement = self::connectToDb()->prepare("INSERT INTO " . $table . "(" . $key1 . "," . $key2 . 
 			") VALUES(" . $label1. "," . $label2 . ")");
 
-		return $statement->execute(array($label1 => $value1, $label2 => $value2));
+		return $statement->execute(array($label1 => $v1, $label2 => $v2));
+	}
+
+	// Checks if a link exists in a linktable table
+	public static function linktable_has($table, $key1, $key2, $v1, $v2)
+	{
+		(self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
 	// Returns the object based on id. If the object doesn't exist, it'll return false.
@@ -33,26 +48,24 @@ class DB
 		return self::connectToDb()->query("SELECT * FROM " . $table . " WHERE id=" . $id)->fetch(PDO::FETCH_ASSOC);
 	}
 
-	// Creates a new row. Returns id on succes
-	public static function insert($table, $properties)
+	// Returns all target ids from a linktable
+	public static function linktable_getAllIds($table, $wantKey, $selKey, $selVal)
 	{
-		$db = self::connectToDb();
+		$result = self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . "=" . $selVal)->fetchAll(PDO::FETCH_ASSOC);
 
-		$statement = $db->prepare("INSERT INTO " . $table . "(data) VALUES(:data)");
-
-
-		if ($statement->execute(array(":data" => json_encode($properties))))
+		if ($result)
 		{
-			return $db->lastInsertId("id");
+			$ids = [];
+
+			foreach ($result AS $row)
+			{
+				$ids[] = $row[$wantKey];
+			}
+
+			return $ids;
 		}
 		return false;
-	}
-
-	// Edits a row
-	public static function edit($table, $id, $properties)
-	{
-		self::connectToDb()->prepare("UPDATE " . $table . " SET data=:data WHERE id=" . $id)->execute(array(":data" => json_encode($properties)));
-	}
+	} 
 }
 
 ?>

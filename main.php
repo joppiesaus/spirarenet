@@ -1,6 +1,7 @@
 <?php
 
 require "dbtools.php";
+require "JsonDBObjectMapper.php";
 
 class JsonDBObject
 {
@@ -23,7 +24,7 @@ class JsonDBObject
 	// Creates the object, 
 	public function create()
 	{
-		$i = DB::insert($this->TABLE, $this->data);
+		$i = JsonDBObjectMapper::insert($this->TABLE, $this->data);
 		if (!$i)
 		{
 			throw("Creation failed!");
@@ -33,7 +34,7 @@ class JsonDBObject
 
 	public function save()
 	{
-		DB::edit($this->TABLE, $this->id, $this->data);
+		JsonDBObjectMapper::edit($this->TABLE, $this->id, $this->data);
 	}
 
 	public function load()
@@ -99,6 +100,7 @@ class User extends JsonDBObject
 {
 	protected $TABLE = "users";
 
+	// TODO: Make a mapper of this too, since this will not be the only index table
 	public static function getUserIDByName($name)
 	{
 		$result = DB::connectToDb()->query("SELECT id FROM ind_users WHERE name=\"" . $name . "\"")->fetch(PDO::FETCH_ASSOC);
@@ -126,23 +128,23 @@ class User extends JsonDBObject
 		// index
 		$db = DB::connectToDb();
 		$statement = $db->prepare("INSERT INTO ind_users(id,name) VALUES(:id,:name)");
-		if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["username"])))
+		
+		try
 		{
-			throw "Error, user probably already exists!";
+			if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["username"])))
+			{
+				echo "Error, user probably already exists!";
+				return false;
+			}
+		}
+		catch (PDOException $exception)
+		{
+			echo "Error, user probably exists: " . $exception->getMessage();
 			return false;
 		}
+
 		return true;
 	}
-
-	// Adds and links an property(JsonDBObject) to this user.
-	/*public function addProperty(&$prop)
-	{
-		// TODO: Check if the user already has property
-		array_push($this->data["properties"], $prop->data["property"]);
-
-		$this->save();
-		$prop->addUser($this->id);
-	}*/
 
 	// Displays all properties of this user
 	public function displayAllProperties()
@@ -162,19 +164,13 @@ class User extends JsonDBObject
 	// Returns if the user already has a property with the id $pid
 	public function hasProperty($pid)
 	{
-		return (DB::connectToDb()->query("SELECT * FROM user_prop WHERE uid=" . $this->id . " AND pid=" . $pid)->fetch(PDO::FETCH_ASSOC) != FALSE);
+		return DB::linktable_has($this->TABLE, "pid", "uid", $pid, $this->id);
 	}
 
 	// Returns an array of all property id's this user has
 	public function getAllProperties()
 	{
-		$result = DB::connectToDb()->query("SELECT pid FROM user_prop WHERE uid=" . $this->id)->fetchAll(PDO::FETCH_ASSOC);
-		$arr = array();
-		for ($i = 0; $i < count($result); $i++)
-		{
-			$arr[$i] = $result[$i]["pid"];
-		}
-		return $arr;
+		return DB::linktable_getAllIds($this->TABLE, "pid", "uid", $this->id);
 	}
 }
 
@@ -184,17 +180,13 @@ class Property extends JsonDBObject
 
 	// Creates a new property(json only, not the dbobj)
 	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS
-	public static function createProperty($name, $description, $type, $id = NULL, $css = "")
+	public static function createProperty($name, $description, $type, $css = "")
 	{
 		$prop = array();
 		$prop["type"] = $type;
 		$prop["name"] = $name;
 		$prop["description"] = $description;
-
-		if (isset($id))
-		{
-			$prop["id"] = $id;
-		}
+		
 		if (!empty($css))
 		{
 			$prop["css"] = $css;
@@ -212,33 +204,13 @@ class Property extends JsonDBObject
 	// Returns if the property already has a user with the id $uid
 	public function hasUser($uid)
 	{
-		return (DB::connectToDb()->query("SELECT * FROM user_prop WHERE pid=" . $this->id . " AND uid=" . $uid)->fetch(PDO::FETCH_ASSOC) != FALSE);
+		return DB::linktable_has($this->TABLE, "uid", "pid", $uid, $this->id);
 	}
 
 	// Returns an array of all user id's this property has
 	public function getAllUsers()
 	{
-		$result = DB::connectToDb()->query("SELECT uid FROM user_prop WHERE pid=" . $this->id)->fetchAll(PDO::FETCH_ASSOC);
-		
-		if( $result )
-		{
-			$arr = [];
-
-			foreach( $result AS $row )
-			{	
-				$arr[] = $row["uid"];
-			}
-
-			return $arr;
-		}
-
-
-		// $arr = array();
-		// for ($i = 0; $i < count($result); $i++)
-		// {
-		// 	$arr[$i] = $result[$i]["uid"];
-		// }
-		// return $arr;
+		return DB::linktable_getAllIds($this->TABLE, "uid", "pid", $this->id);
 	}
 
 	public function display()
