@@ -93,6 +93,11 @@ Imported as class Property
 	if you create an event, you're automatically an organisator
 
 TODO:
+- Think about events: how about "urgent" ones and long period ones?
+	[] participate button?
+- navbarry
+- explorer page
+
 - Make code pretty!
 - Error checking!
 - FIX CSS GENERATION

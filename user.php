@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div id="container"> 
+<div id="container">
 <?php
 
 if (!isset($_GET["id"]))

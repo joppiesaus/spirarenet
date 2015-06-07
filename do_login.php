@@ -23,9 +23,15 @@ if (hash("sha512", $_POST["password"]) != $user->data["profile"]["password"])
 	exit;
 }
 
+
 // Why check if someone is logged in already?
 session_start();
 $_SESSION["uid"] = $uid;
+
+if (isset($user["uadmin"]))
+{
+	$_SESSION["uadmin"] = TRUE;
+}
 
 echo $user->data["profile"]["name"] . ", you're now logged in!";
 
