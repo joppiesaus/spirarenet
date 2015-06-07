@@ -21,6 +21,11 @@ window.onload = function()
 	}
 };
 
+// Returns an DOM element with the id given
+function ge(i)
+{
+	return document.getElementById(i);
+}
 
 // Sends an asynchronous httpget to the specified URL, calls callback when ready with this as XMLHttpRequest
 function httpGet(url, callback)

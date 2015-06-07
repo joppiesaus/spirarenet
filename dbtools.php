@@ -50,24 +50,34 @@ class DB
 		(self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
-	// Returns all target ids from a linktable
-	public static function linktable_getAllIds($table, $wantKey, $selKey, $selVal)
+	protected static function getWantedKeysFromRows($arr, $wantKey)
 	{
-		$result = self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . "=" . $selVal)->fetchAll(PDO::FETCH_ASSOC);
-
 		// Thanks Tim
 		$ids = [];
 
-		if ($result)
+		if ($arr)
 		{
-			foreach ($result as $row)
+			foreach ($arr as $row)
 			{
 				$ids[] = $row[$wantKey];
 			}
 		}
 
-		return $ids;
+		return $ids;	
+	}
+
+	// Returns all target ids from a linktable
+	public static function linktable_getAllIds($table, $wantKey, $selKey, $selVal)
+	{
+		return self::getWantedKeysFromRows(self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . "=" . $selVal)->fetchAll(PDO::FETCH_ASSOC), $wantKey);		
 	} 
+
+
+	// Searches a linktable
+	public static function linktable_search($table, $wantKey, $selKey, $selVal)
+	{
+		return self::getWantedKeysFromRows(self::connectToDb()->query("SELECT " . $wantKey . " FROM " . $table . " WHERE " . $selKey . " LIKE \"" . $selVal . "%\"")->fetchAll(PDO::FETCH_ASSOC), $wantKey);
+	}
 }
 
 ?>

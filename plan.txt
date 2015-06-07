@@ -97,6 +97,9 @@ TODO:
 	[] participate button?
 - navbarry
 - explorer page
+- Improve searching
+- Selection!
+	[] Add propertyclick aswell for events and users
 
 - Make code pretty!
 - Error checking!

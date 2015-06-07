@@ -53,8 +53,7 @@ else
 	foreach ($users as $uid)
 	{
 		$user = new User($uid);
-		$up = $user->data["profile"];
-		echo "<div class=\"p_userpreview\"><a href=\"user.php?id=" . $uid . "\"><p>" . $up["name"] . "</p><img src=\"" . $up["picture_url"] . "\"></a></div>";
+		$user->display();
 	}
 }
 
@@ -70,7 +69,7 @@ else
 	foreach ($events as $eid)
 	{
 		$evnt = new Event($eid);
-		echo "<a href=\"event.php?id=" . $eid . "\">" . $evnt->data["name"] . "</a><br>";
+		$evnt->display();
 	}
 }
 

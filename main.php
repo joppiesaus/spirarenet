@@ -179,6 +179,12 @@ class User extends JsonDBObject
 		return DB::linktable_getAllIds("user_prop", "pid", "uid", $this->id);
 	}
 
+	// Makes a user preview appear on the page
+	public function display()
+	{
+		echo "<div class=\"p_userpreview\"><a href=\"user.php?id=" . $this->id . "\"><p>" . $this->data["profile"]["name"] . "</p><img src=\"" . $this->data["profile"]["picture_url"] . "\"></a></div>";
+	}
+
 	// Returns true if this user is an admin
 	/*public function isAdmin()
 	{
@@ -258,6 +264,12 @@ class Event extends JsonDBObject
 	public function addOrganisator($uid)
 	{
 		return DB::linktable_insert("evnt_organisator", "eid", "uid", $this->id, $uid);
+	}
+
+	// Displays an preview of this event on the page
+	public function display()
+	{
+		echo "<a href=\"event.php?id=" . $this->id . "\">" . $this->data["name"] . "</a><br>";
 	}
 }
 
