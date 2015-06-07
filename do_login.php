@@ -28,11 +28,13 @@ if (hash("sha512", $_POST["password"]) != $user->data["profile"]["password"])
 session_start();
 $_SESSION["uid"] = $uid;
 
-if (isset($user["uadmin"]))
+if (isset($user->data["uadmin"]))
 {
 	$_SESSION["uadmin"] = TRUE;
 }
 
-echo $user->data["profile"]["name"] . ", you're now logged in!";
+$_SESSION["usernotifymessage"] = $user->data["profile"]["name"] . ", you're now logged in!";
+
+header("Location:user.php?id=" . $uid);
 
 ?>

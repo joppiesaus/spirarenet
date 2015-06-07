@@ -95,6 +95,10 @@ switch ($_GET["action"])
 		$_SESSION["usernotifymessage"] = "Your image was succesfully uploaded!";
 
 		break;
+
+	default:
+		echo "Hurr durr \"" . $_GET["action"] . "\" is no command! D:";
+		break;
 }
 
 ?>

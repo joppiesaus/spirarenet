@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Propertyyyy</title>
+	<title>Eventttt</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" href="css/properties_generated.css" />
@@ -51,7 +51,10 @@ else
 session_start();
 if (isset($_SESSION["uid"]))
 {
-	// TODO: Add property adding
+	if ($evnt->isOrganisator($_SESSION["uid"]))
+	{
+		// TODO: Add property adding
+	}
 }
 
 ?>

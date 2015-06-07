@@ -32,12 +32,18 @@ echo "<p id=\"uprofile_name\">" . $jp["name"] . "</p>";
 echo "<p>" . $jp["description"] . "</p>";
 $prop->display();
 
-// TODO: Check if user already has property, then handle it another way(e.g. remove this badge)
-
 session_start();
 if (isset($_SESSION["uid"]))
 {
-	echo "<br><br><input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
+	$user = new User($_SESSION["uid"]);
+	if ($user->hasProperty($pid))
+	{
+		echo "<br><br>You have this " . $jp["type"] . "! <input type=\"button\" value=\"Remove this " . $jp["type"] . " from your profile\" onclick=\"usersystem('?action=removeproperty&pid=" . $pid . "')\"/>";
+	}
+	else
+	{
+		echo "<br><br><input type=\"button\" value=\"Add this " . $jp["type"] . " to your profile\" onclick=\"usersystem('?action=addproperty&pid=" . $pid . "')\"/>";
+	}
 }
 Main::addGlobalEvents();
 

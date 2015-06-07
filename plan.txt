@@ -101,6 +101,8 @@ TODO:
 - Selection!
 	[] Add propertyclick aswell for events and users
 
+- Add removeproperty
+
 - Make code pretty!
 - Error checking!
 - FIX CSS GENERATION

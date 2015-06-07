@@ -257,7 +257,7 @@ class Event extends JsonDBObject
 	// Returns true if the user is an organisator of this event
 	public function isOrganisator($uid)
 	{
-		return DB::linktable_has("evnt_organisator", "uid", "eid", $this->id);
+		return DB::linktable_has("evnt_organisator", "uid", "eid", $uid, $this->id);
 	}
 
 	// Adds an organisator to this event. Returns false on fail
@@ -269,7 +269,7 @@ class Event extends JsonDBObject
 	// Displays an preview of this event on the page
 	public function display()
 	{
-		echo "<a href=\"event.php?id=" . $this->id . "\">" . $this->data["name"] . "</a><br>";
+		echo "<a href=\"event.php?id=" . $this->id . "\">" . $this->data["title"] . "</a><br>";
 	}
 }
 

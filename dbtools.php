@@ -47,7 +47,7 @@ class DB
 	// Checks if a link exists in a linktable table
 	public static function linktable_has($table, $key1, $key2, $v1, $v2)
 	{
-		(self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
+		return (self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
 	}
 
 	protected static function getWantedKeysFromRows($arr, $wantKey)
