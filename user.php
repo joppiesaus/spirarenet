@@ -10,6 +10,33 @@
 </head>
 <body>
 
+<div id="nv">
+	<div id="nvwrap">
+		<ul id="nav">
+			<li>Explore
+				<ul>
+					<li><a href="search.php">Search</a></li>
+				</ul>
+			</li>
+			<li>Create
+				<ul>
+					<li><a href="createproperty.php">Property</a></li>
+					<li><a href="createevent.php">Event</a></li>
+					<li><a href="createuser.php">User</a></li>
+				</ul>
+			</li>
+			<li id="nyou">You
+				<ul>
+					<li><a href="#">Profile</a></li>
+					<li><a href="login.php">Login</a></li>
+					<li><a href="logout.php">Logout</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
 <div id="container">
 <?php
 

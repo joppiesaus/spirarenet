@@ -3,11 +3,70 @@ body
 	font-family: 'Proxima Nova', sans-serif;
 	margin: 0;
 	padding: 0;
+	background-color: #A2B2A3;
+}
+
+#nv
+{
+	width: 100%;
+	background-color: #ACC2E0;
+	border-bottom: 1px solid #89A7D0;
+	box-shadow: 0px 0px 10px #888888;
+}
+#nvwrap
+{
+	margin: 0 auto;
+	width: 80%;
+}
+#nv ul
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+}
+#nv li
+{
+	float: left;
+	min-width: 100px;
+	height: 45px;
+	line-height: 45px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+}
+#nv li:hover
+{
+	background-color: #8BBCFF;
+}
+
+#nav ul
+{
+	display: none;
+}
+#nav ul>li
+{
+	background-color: #8BBCFF;
+	height: 100%;
+	width: inherit;
+}
+#nav li:hover > ul
+{
+	display: block;
+}
+#nv a
+{
+	display: block;
+}
+#nv a, #nv a:hover, #nv a:active
+{
+	text-decoration: none;
+	color: inherit;
 }
 
 #container
 {
-	background-color: #EEEEEE;
+	background-color: #EEE;
 	margin: 0 auto;
 	width: 80%;
 	padding: 10px;
@@ -30,7 +89,7 @@ body
 	width: 260px;
 	float: right;
 	position: relative;
-	top: -15px;
+	top: -10px;
 }
 
 .p_userpreview
