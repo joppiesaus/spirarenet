@@ -12,7 +12,13 @@
 <script>
 function search()
 {
-	httpGet("do_search.php?query=" + ge("searchtb").value + "&s=" + ge("wantproperty").value + ge("wantevent").value + ge("wantuser").value,
+	function c(n)
+	{
+		var e = ge(n);
+		return (e.checked ? e.value : "");
+	}
+
+	httpGet("do_search.php?query=" + ge("searchtb").value + "&s=" + c("wantproperty") + c("wantevent") + c("wantuser"),
 		function()
 		{
 			ge("result").innerHTML = this.responseText;
