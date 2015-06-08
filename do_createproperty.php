@@ -20,7 +20,7 @@ $prop->data = array(
 $prop->create();
 
 // Generate CSS
-if (!empty($_POST["css"]))
+/*if (!empty($_POST["css"]))
 {
 	$cdeps = "";
 
@@ -32,7 +32,7 @@ if (!empty($_POST["css"]))
 	require "cssGenerator.php";
 
 	CSSGEN::addProperty($prop, $_POST["css"], $cdeps);
-}
+}*/
 
 // Add notification
 session_start();

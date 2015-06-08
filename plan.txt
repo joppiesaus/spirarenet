@@ -30,6 +30,7 @@ Let's see if I can get this to something
 - Table of user indexes(ind_users)
 	[] id -> users[id]
 	[] name -> username
+	[] realname -> name
 
 - Table of users
 	[]	id
@@ -58,11 +59,13 @@ Imported as class User
 	- add a relation for easy deleting
 	- you can easially select certain stuff
 
+- Table of property indexing(ind_props)
+	[] id -> properties[id]
+	[] name -> name
 
 - Table of properties
 	[] id
 	[] data
-		[] property - this is what gets saved on someone's profile
 		[] type(tag or badge)
 		[] name
 		[] description
@@ -73,6 +76,10 @@ Imported as class User
 					o classname
  
 Imported as class Property
+
+- Table of event indexing(ind_evnts)
+	[] id -> events[id]	
+	[] title -> title
 
 - Table of events
 	[] id

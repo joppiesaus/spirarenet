@@ -29,10 +29,38 @@ class DB
 		return self::connectToDb()->query("SELECT * FROM " . $table . " WHERE id=" . $id)->fetch(PDO::FETCH_ASSOC);
 	}
 
+	// Inserts n values in a table. At least one key and value is required.
+	public static function multiple_insert($table, $keys, $values)
+	{
+		$query = "INSERT INTO " . $table . "(" . $keys[0];
+		for ($i = 1; $i < count($keys); $i++)
+		{
+			$query .= "," . $keys[$i];
+		}
 
+		$query .= ") VALUES(:" . $keys[0];
+		for ($i = 1; $i < count($keys); $i++)
+		{
+			$query .= ",:" . $keys[$i];
+		}
 
-	// Inserts two values in a linktable
-	public static function linktable_insert($table, $key1, $key2, $v1, $v2)
+		$query .= ")";
+
+		$db = self::connectToDb();
+		$statement = $db->prepare($query);
+
+		$vls = [];
+
+		for ($i = 0; $i < count($keys); $i++)
+		{
+			$vls[":" . $keys[$i]] = $values[$i];
+		}
+
+		return $statement->execute($vls);
+	}
+
+	// Inserts two values in a table
+	public static function dual_insert($table, $key1, $key2, $v1, $v2)
 	{
 		// This code 2sad4me ;_;
 		$label1 = ":" . $key1;

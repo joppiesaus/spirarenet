@@ -1,0 +1,117 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+CREATE DATABASE IF NOT EXISTS `spirarenet` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spirarenet`;
+
+CREATE TABLE IF NOT EXISTS `events` (
+`id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `evnt_organisator` (
+  `eid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `evnt_prop` (
+  `eid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ind_evnts` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ind_props` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ind_users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `realname` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `properties` (
+`id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `users` (
+`id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `user_prop` (
+  `uid` int(11) NOT NULL,
+  `pid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `events`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `evnt_organisator`
+ ADD PRIMARY KEY (`eid`), ADD KEY `eid` (`eid`), ADD KEY `uid` (`uid`);
+
+ALTER TABLE `evnt_prop`
+ ADD PRIMARY KEY (`eid`), ADD KEY `pid` (`pid`);
+
+ALTER TABLE `ind_evnts`
+ ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `ind_props`
+ ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `ind_users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `id` (`id`), ADD KEY `name_2` (`name`);
+
+ALTER TABLE `properties`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `user_prop`
+ ADD PRIMARY KEY (`pid`), ADD UNIQUE KEY `uid_2` (`uid`), ADD UNIQUE KEY `pid_2` (`pid`), ADD KEY `uid` (`uid`), ADD KEY `pid` (`pid`), ADD KEY `uid_3` (`uid`);
+
+
+ALTER TABLE `events`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+ALTER TABLE `properties`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+ALTER TABLE `users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+
+ALTER TABLE `evnt_organisator`
+ADD CONSTRAINT `evnt_organisator_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `evnt_organisator_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE `evnt_prop`
+ADD CONSTRAINT `evnt_prop_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `evnt_prop_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `properties` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE `ind_evnts`
+ADD CONSTRAINT `ind_evnts_ibfk_1` FOREIGN KEY (`id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE `ind_props`
+ADD CONSTRAINT `ind_props_ibfk_1` FOREIGN KEY (`id`) REFERENCES `properties` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE `ind_users`
+ADD CONSTRAINT `ind_users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+ALTER TABLE `user_prop`
+ADD CONSTRAINT `user_prop_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+ADD CONSTRAINT `user_prop_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `properties` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

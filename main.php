@@ -131,25 +131,13 @@ class User extends JsonDBObject
 	{
 		parent::create();
 
-		// index
-		$db = DB::connectToDb();
-		$statement = $db->prepare("INSERT INTO ind_users(id,name) VALUES(:id,:name)");
-		
-		try
-		{
-			if (!$statement->execute(array(":id" => $this->id, ":name" => $this->data["profile"]["username"])))
-			{
-				echo "Error, user probably already exists!";
-				return false;
-			}
-		}
-		catch (PDOException $exception)
-		{
-			echo "Error, user probably exists: " . $exception->getMessage();
-			return false;
-		}
-
-		return true;
+		return (!DB::multiple_insert("ind_users", ["id", "name", "realname"],
+			[
+				$this->id,
+				$this->data["profile"]["username"],
+				$this->data["profile"]["name"]
+			]
+			));
 	}
 
 	// Displays all properties of this user
@@ -164,7 +152,7 @@ class User extends JsonDBObject
 	// Adds and links a property to this user
 	public function addProperty($pid)
 	{
-		DB::linktable_insert("user_prop", "uid", "pid", $this->id, $pid);
+		DB::dual_insert("user_prop", "uid", "pid", $this->id, $pid);
 	}
 
 	// Returns if the user already has a property with the id $pid
@@ -196,6 +184,13 @@ class Property extends JsonDBObject
 {
 	protected $TABLE = "properties";
 
+	public function create()
+	{
+		parent::create();
+
+		DB::dual_insert("ind_props", "id", "name", $this->id, $this->data["name"]);
+	}
+
 	// Creates a new property(json only, not the dbobj)
 	// Arguments: name - name, description - description, type - badge or tag, id - id to database index, css - CSS class CONTENTS
 	public static function createProperty($name, $description, $type, $css = "")
@@ -216,7 +211,7 @@ class Property extends JsonDBObject
 	// Adds and links an user to this property
 	public function addUser($uid)
 	{
-		DB::linktable_insert("user_prop", "uid", "pid", $uid, $this->id);
+		DB::dual_insert("user_prop", "uid", "pid", $uid, $this->id);
 	}
 
 	// Returns if the property already has a user with the id $uid
@@ -248,6 +243,14 @@ class Event extends JsonDBObject
 {
 	protected $TABLE = "events";
 
+
+	public function create()
+	{
+		parent::create();
+
+		DB::dual_insert("ind_evnts", "id", "title", $this->id, $this->data["title"]);
+	}
+
 	// returns an array of property id's of this event
 	public function getAllProperties()
 	{
@@ -263,7 +266,7 @@ class Event extends JsonDBObject
 	// Adds an organisator to this event. Returns false on fail
 	public function addOrganisator($uid)
 	{
-		return DB::linktable_insert("evnt_organisator", "eid", "uid", $this->id, $uid);
+		return DB::dual_insert("evnt_organisator", "eid", "uid", $this->id, $uid);
 	}
 
 	// Displays an preview of this event on the page
