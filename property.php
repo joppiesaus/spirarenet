@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<?php include "code/navbar.php"; ?>
+
 <div id="container">
 
 <?php
