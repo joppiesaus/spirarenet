@@ -29,7 +29,7 @@ $prop->create();
 		$cdeps = $_POST["cssdeps"];
 	}
 
-	require "cssGenerator.php";
+	require "code/cssGenerator.php";
 
 	CSSGEN::addProperty($prop, $_POST["css"], $cdeps);
 }*/

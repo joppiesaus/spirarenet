@@ -1,7 +1,7 @@
 <?php
 
-require "dbtools.php";
-require "JsonDBObjectMapper.php";
+require "code/dbtools.php";
+require "code/JsonDBObjectMapper.php";
 
 class JsonDBObject
 {
