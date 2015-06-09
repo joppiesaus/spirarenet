@@ -10,58 +10,34 @@
 </head>
 <body>
 
-<nav id="primary_nav_wrap">
+<!--------------------------------------
+TODO:
+  - Make prettier
+  - Make session-dependent(merge in php)
+  - Add to ALL pages(merge in php)
+------------------------------------ -->
+<nav id="nav_wrap">
 <ul>
-  <li class="current-menu-item"><a href="#">Home</a></li>
-  <li><a href="#">Menu 1</a>
+  <li><span>Explore</span>
     <ul>
-      <li><a href="#">Sub Menu 1</a></li>
-      <li><a href="#">Sub Menu 2</a></li>
-      <li><a href="#">Sub Menu 3</a></li>
-      <li><a href="#">Sub Menu 4</a>
-        <ul>
-          <li><a href="#">Deep Menu 1</a>
-            <ul>
-              <li><a href="#">Sub Deep 1</a></li>
-              <li><a href="#">Sub Deep 2</a></li>
-              <li><a href="#">Sub Deep 3</a></li>
-                <li><a href="#">Sub Deep 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Deep Menu 2</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Sub Menu 5</a></li>
+      <li><a href="search.php">Search stuff</a></li>
     </ul>
   </li>
-  <li><a href="#">Menu 2</a>
+  <li><span>Create</span>
     <ul>
-      <li><a href="#">Sub Menu 1</a></li>
-      <li><a href="#">Sub Menu 2</a></li>
-      <li><a href="#">Sub Menu 3</a></li>
+      <li><a href="createproperty.php">Property</a></li>
+      <li><a href="createevent.php">Event</a></li>
+      <li><a href="createuser.php">User</a></li>
     </ul>
   </li>
-  <li><a href="#">Menu 3</a>
+  <li><span>You</span>
     <ul>
-      <li class="dir"><a href="#">Sub Menu 1</a></li>
-      <li class="dir"><a href="#">Sub Menu 2 THIS IS SO LONG IT MIGHT CAUSE AN ISSEUE BUT MAYBE NOT?</a>
-        <ul>
-          <li><a href="#">Category 1</a></li>
-          <li><a href="#">Category 2</a></li>
-          <li><a href="#">Category 3</a></li>
-          <li><a href="#">Category 4</a></li>
-          <li><a href="#">Category 5</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Sub Menu 3</a></li>
-      <li><a href="#">Sub Menu 4</a></li>
-      <li><a href="#">Sub Menu 5</a></li>
+      <li><a href="user.php">Profile</a></li>
+      <li><a target="_blank" href="https://youtu.be/dQw4w9WgXcQ">Settings</a></li>
+      <li><a href="login.php">Login someone</a></li>
+      <li><a href="logout.php">Logout</a></li>
     </ul>
   </li>
-  <li><a href="#">Menu 4</a></li>
-  <li><a href="#">Menu 5</a></li>
-  <li><a href="#">Menu 6</a></li>
-  <li><a href="#">Contact Us</a></li>
 </ul>
 </nav>
 
