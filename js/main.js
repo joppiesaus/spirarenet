@@ -36,6 +36,24 @@ function httpGet(url, callback)
 	http.send(null);
 }
 
+// Sends an asynchronous http request with given data with POST, calls callback when ready
+// Params in this format: "hurr=durr&name=james&dinosaur=hermaphrodite"
+function httpPostRequest(url, params, callback)
+{
+	var request = new XMLHttpRequest();
+	request.open("POST", url, true);
+	
+	// Headers
+	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	// Outdated, browser should do this on its own
+	//request.setRequestHeader("Content-length", params.length);
+	//request.setRequestHeader("Connection", "close");
+	
+	request.onload = callback;
+	request.send(params);
+}
+
 // Notify the user of an action on-screen
 function userNotify(msg)
 {

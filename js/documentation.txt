@@ -1,0 +1,11 @@
+very poor
+
+
+### PROPERTIES ###
+
+When a property gets displayed on a page, it has:
+	- id "p<id>"
+	- onclick "propertyclick(<id>)"
+
+Propertyclick is defined by a js file, it has functionality based on that
+

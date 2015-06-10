@@ -59,7 +59,7 @@ class Main
 	// Displays the property on the page. Make sure you included style.css. prop is propery json. If id is not 0, it'll create a link to the property action
 	public static function displayProperty($prop, $id = 0)
 	{
-		$output = "<div class=\"property " . $prop["type"];
+		$output = "<div id=\"p" . $id ."\" class=\"property " . $prop["type"];
 
 		if (isset($prop["css"]))
 		{
@@ -78,10 +78,18 @@ class Main
 
 		if (!empty($id))
 		{
-			$output .= " onclick=\"propertyClick('" . $id . "')\"";
+			$output .= " onclick=\"propertyClick(" . $id . ")\"";
 		}
 
-		$output .=  ">" . $prop["name"] . "</div>";
+		$output .=  ">" . $prop["name"];
+
+		if (isset($prop["html"]))
+		{
+			$output .= $prop["html"];
+		}
+
+		$output .= "</div>";
+
 		echo $output;
 	}
 
