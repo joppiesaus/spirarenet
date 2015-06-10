@@ -102,11 +102,17 @@ Imported as class Property
 TODO:
 - Think about events: how about "urgent" ones and long period ones?
 	[] participate button?
+
+- Selection!
+	[] Add propertyclick aswell for events and users
+
 - navbarry
 - explorer page
 - Improve searching
-- Selection!
-	[] Add propertyclick aswell for events and users
+	[] data handling? sorting?
+- error catching when selecting stuff!
+
+
 
 - Add removeproperty
 

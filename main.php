@@ -40,6 +40,7 @@ class JsonDBObject
 	public function load()
 	{
 		$this->data = json_decode(DB::selectById($this->TABLE, $this->id)["data"], true);
+		return ($this->data !== NULL);
 	}
 }
 

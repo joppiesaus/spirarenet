@@ -20,6 +20,7 @@ class DB
 			echo "<h1>D:</h1><p><b>Owh crap.</b> Something went horribly wrong. If you see the sweating computer monkeys, give them this:</p><pre>" .
 				 $error->getMessage() .
 				 "</pre>";
+			exit;
 		}
 	}
 

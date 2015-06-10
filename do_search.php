@@ -15,31 +15,36 @@ $isid = (intval($q) !== 0);
 
 require "main.php";
 
-// TODO: Remove duplicates and think about data handling and sorting, not just printing evertyhing on the screen
+// TODO: Think about data handling and sorting, not just printing evertyhing on the screen
 if (strpos($searchfor, 'u') !== FALSE)
 {
+	$users = [];
+
 	if ($isid === TRUE)
 	{
-		$user = new User($q);
-		if ($user)
-		{
-			$user->display();
-		}
+		$users[$q] = 0;
 	}
 
 	foreach (DB::linktable_search("ind_users", "id", "name", $q) as $uid)
 	{
-		$user = new User($uid);
-		$user->display();
+		$users[$uid] = 0;
 	}
 
 	foreach (DB::linktable_search("ind_users", "id", "realname", $q) as $uid)
+	{
+		$users[$uid] = 0;
+	}
+
+	// display all users
+	foreach (array_keys($users) as $uid)
 	{
 		$user = new User($uid);
 		$user->display();
 	}
 }
 
+
+// Not doing duplicate checking for the rest, chance is too small
 if (strpos($searchfor, 'e') !== FALSE)
 {
 	if ($isid === TRUE)
