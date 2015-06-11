@@ -8,7 +8,6 @@
 
 <?php
 
-
 $exit = false;
 if (!isset($_GET["id"]))
 {
@@ -27,7 +26,14 @@ if ($exit)
 	exit;
 }
 
-include "dbtools.php";
+session_start();
+if (empty($_SESSION["uadmin"]))
+{
+	echo "How about no?";
+	exit;
+}
+
+include "code/dbtools.php";
 
 $id = $_GET["id"];
 $table = $_GET["table"];

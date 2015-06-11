@@ -6,7 +6,14 @@ if (empty($_POST))
 	exit;
 }
 
-require "dbtools.php";
+session_start();
+if (empty($_SESSION["uadmin"]))
+{
+	echo "How about no?";
+	exit;
+}
+
+require "code/dbtools.php";
 
 DB::edit($_POST["table"], $_POST["id"], json_decode($_POST["json"]));
 
