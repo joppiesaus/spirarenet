@@ -49,6 +49,28 @@ switch ($_GET["action"])
 
 		break;
 
+	case "removeproperty":
+
+		if (!isset($pid))
+		{
+			exit;
+		}
+
+		$user = new User($uid);
+		$prop = new Property($pid);
+
+		// TODO: Check if prop exist!
+		if ($user->removeProperty($pid))
+		{
+			echo "Succesfully deleted " . $prop->data["type"] . " " . $prop->data["name"] . " from your profile, " . $user->data["profile"]["name"] . "!";
+		}
+		else
+		{
+			echo "Failed to remove " . $prop->data["type"] . " " . $prop->data["name"] . " D:";
+		}
+
+		break;
+
 	case "uploadprofilepic":
 
 		// TODO: do from location where the user came from

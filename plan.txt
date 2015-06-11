@@ -110,6 +110,7 @@ Notification(array, json)
 
 
 TODO:
+- check if JsonDBObject exists!!!!
 - Think about events: how about "urgent" ones and long period ones?
 	[] participate button?
 

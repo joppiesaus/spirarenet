@@ -3,6 +3,7 @@
 require "code/dbtools.php";
 require "code/JsonDBObjectMapper.php";
 
+
 class JsonDBObject
 {
 	// If id is not 0, instance will set id and load
@@ -27,9 +28,11 @@ class JsonDBObject
 		$i = JsonDBObjectMapper::insert($this->TABLE, $this->data);
 		if (!$i)
 		{
-			throw("Creation failed!");
+			throw("Creation failed!"); // impossible php lel
+			return false;
 		}
 		$this->id = intval($i);
+		return true;
 	}
 
 	public function save()
@@ -162,6 +165,12 @@ class User extends JsonDBObject
 	public function addProperty($pid)
 	{
 		DB::dual_insert("user_prop", "uid", "pid", $this->id, $pid);
+	}
+
+	// Removes a property from this user
+	public function removeProperty($pid)
+	{
+		return DB::linktable_delete("user_prop", "uid", "pid", $this->id, $pid);
 	}
 
 	// Returns if the user already has a property with the id $pid

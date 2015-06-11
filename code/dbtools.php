@@ -73,10 +73,27 @@ class DB
 		return $statement->execute(array($label1 => $v1, $label2 => $v2));
 	}
 
+	// Removes a row from a table based on id
+	public static function removeById($table, $id)
+	{
+		return (self::connectToDb()->execute("DELETE FROM " . $table . " WHERE id=" . $id));
+	}
+
+	// Removes a row from a table based on key and it's value
+	public static function removeByKey($table, $key, $value)
+	{
+		return (self::connectToDb()->execute("DELETE FROM " . $table . " WHERE " . $key . "=" . $value));
+	}
+
 	// Checks if a link exists in a linktable table
 	public static function linktable_has($table, $key1, $key2, $v1, $v2)
 	{
 		return (self::connectToDb()->query("SELECT * FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2)->fetch(PDO::FETCH_ASSOC) != FALSE);
+	}
+
+	public static function linktable_delete($table, $key1, $key2, $v1, $v2)
+	{
+		return (self::connectToDb()->query("DELETE FROM " . $table . " WHERE " . $key1 . "=" . $v1 . " AND " . $key2 . "=" . $v2));
 	}
 
 	protected static function getWantedKeysFromRows($arr, $wantKey)
