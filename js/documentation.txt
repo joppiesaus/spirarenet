@@ -1,4 +1,19 @@
-very poor
+### main.js ###
+
+	- ge(id)
+		gets dom element by id
+
+	- httpRequest(url, callback)
+		Sends an asynchronous httpget to the specified URL, calls callback when ready with this as XMLHttpRequest
+
+	- userNotify(msg)
+
+		notify the user on the screen, NOT give the user an notifcation!
+
+	- usersystem(parameters)
+		calls usersystem.php with the parameters, calls usernotify with the result
+
+	- more, see main.js
 
 
 ### PROPERTIES ###

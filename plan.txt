@@ -46,6 +46,8 @@ Let's see if I can get this to something
 			[] email
 			[] picture_url
 			[] bio
+		[] notifications
+			[] array of notifcation data(see "Notification")
 		[] properties (optional)
 			o here you can give this user additional properties that are not linked anywhere.
 Imported as class User
@@ -98,6 +100,14 @@ Imported as class Property
 	[] uid
 	- organisators have access to the event to edit or modify it
 	if you create an event, you're automatically an organisator
+
+
+Notification(array, json)
+	- used to notify the user!
+	[] description
+	[] url
+	[] read(user-side only)
+
 
 TODO:
 - Think about events: how about "urgent" ones and long period ones?

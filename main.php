@@ -285,4 +285,9 @@ class Event extends JsonDBObject
 	}
 }
 
+class Notification
+{
+	var $data;
+}
+
 ?>
