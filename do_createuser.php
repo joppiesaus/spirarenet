@@ -27,6 +27,7 @@ if (!empty($props))
 	$user->data["properties"] = $props;
 }
 
+$user->giveNotification(Notification::create("Welcome! Have fun here!", "comicsanscriminal.com"));
 $user->create();
 
 session_start();

@@ -21,6 +21,7 @@ TODO:
   <li><span>You</span>
     <ul>
       <li><a href="user.php">Profile</a></li>
+      <li><a href="notifications.php">Notifications</a></li>
       <li><a target="_blank" href="https://youtu.be/dQw4w9WgXcQ">Settings</a></li>
       <li><a href="login.php">Login someone</a></li>
       <li><a href="logout.php">Logout</a></li>

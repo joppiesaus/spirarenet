@@ -191,6 +191,18 @@ class User extends JsonDBObject
 		echo "<div class=\"p_userpreview\"><a href=\"user.php?id=" . $this->id . "\"><p>" . $this->data["profile"]["name"] . "</p><img src=\"" . $this->data["profile"]["picture_url"] . "\"></a></div>";
 	}
 
+	// Give the user an notification, doesn't save it
+	public function giveNotification($note)
+	{
+		if (!isset($this->data["notifications"]))
+		{
+			$this->data["notifications"] = [];
+		}
+
+		array_unshift($this->data["notifications"], $note);
+		//$this->save();
+	}
+
 	// Returns true if this user is an admin
 	/*public function isAdmin()
 	{
@@ -296,7 +308,32 @@ class Event extends JsonDBObject
 
 class Notification
 {
-	var $data;
+	// Returns a new notification
+	public static function create($description, $url = "")
+	{
+		$note = 
+		[
+			"description" => $description
+		];
+
+		if (!empty($url))
+		{
+			$note["url"] = $url;
+		}
+
+		return $note;
+	}
+
+	// Displays a notification
+	public static function display($note)
+	{
+		echo "<div class=\"notification\"";
+		if (isset($note["url"]))
+		{
+			echo "onclick=\"window.location='" . $note["url"] . "'\"";
+		}
+		echo ">" . $note["description"] . "</div>";
+	}
 }
 
 ?>
