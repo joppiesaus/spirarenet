@@ -5,7 +5,7 @@ function propertyClick(index)
 
 // Documentation is hard
 // POST data is pids, an JSON array of id's
-function submitSelectedProperties(url, params, callback)
+function submitSelectedProperties(url, callback, params)
 {
 	var els = document.querySelectorAll("div.property.selected");
 	var ids = [];
@@ -18,6 +18,6 @@ function submitSelectedProperties(url, params, callback)
 	if (ids.length > 0)
 	{
 		params = params || "";
-		httpPostRequest(url, params + "&pids=" + JSON.parse(ids), callback);
+		httpPostRequest(url, params + "&pids=" + JSON.stringify(ids), callback);
 	}
 }

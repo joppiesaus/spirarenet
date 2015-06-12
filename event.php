@@ -12,6 +12,7 @@
 
 <?php include "code/navbar.php"; ?>
 
+
 <div id="container">
 
 <?php
@@ -55,7 +56,7 @@ if (isset($_SESSION["uid"]))
 {
 	if ($evnt->isOrganisator($_SESSION["uid"]))
 	{
-		// TODO: Add property adding
+		echo "<a href=\"eventlinking.php?eid=" . $eid . "\">Add properties</a>";
 	}
 }
 
