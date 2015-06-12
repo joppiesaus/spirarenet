@@ -25,7 +25,15 @@ $pid = intval($_GET["id"]);
 
 require "main.php";
 
-$prop = new Property($pid);
+try
+{
+	$prop = new Property($pid);
+}
+catch (NotFoundException $err)
+{
+	echo "User not found!";
+	exit;
+}
 $jp = $prop->data;
 
 

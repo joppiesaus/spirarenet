@@ -114,6 +114,9 @@ TODO:
 - Think about events: how about "urgent" ones and long period ones?
 	[] participate button?
 
+- LINK tags and badges!?
+	- programming and programmer
+
 - Selection!
 	[] Add propertyclick aswell for events and users
 

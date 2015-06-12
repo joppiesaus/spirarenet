@@ -3,16 +3,37 @@
 require "code/dbtools.php";
 require "code/JsonDBObjectMapper.php";
 
+class NotFoundException extends Exception
+{
+    // Redefine the exception so message isn't optional
+    public function __construct($message, $code = 0, Exception $previous = null) {
+        // some code
+    
+        // make sure everything is assigned properly
+        parent::__construct($message, $code, $previous);
+    }
+
+    // custom string representation of object
+    public function __toString() {
+        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+    }
+}
 
 class JsonDBObject
 {
 	// If id is not 0, instance will set id and load
-	function __construct($id = 0)
+	function __construct($id = NULL)
 	{
-		if (!empty($id))
+		if ($id)
 		{
-			$this->id = $id;
-			$this->load();
+			if ($this->load($id))
+			{
+				$this->id = $id;
+			}
+			else
+			{
+				throw new NotFoundException("No such id " . $id);
+			}
 		}
 	}
 
@@ -40,10 +61,17 @@ class JsonDBObject
 		JsonDBObjectMapper::edit($this->TABLE, $this->id, $this->data);
 	}
 
-	public function load()
+	public function load( $id )
 	{
-		$this->data = json_decode(DB::selectById($this->TABLE, $this->id)["data"], true);
-		return ($this->data !== NULL);
+		$data = json_decode( DB::selectById($this->TABLE, $id )["data"], true);
+
+		if( $data )
+		{
+			$this->data = $data;
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 }
 
