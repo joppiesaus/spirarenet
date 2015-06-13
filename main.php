@@ -315,6 +315,12 @@ class Event extends JsonDBObject
 		return DB::linktable_getAllIds("evnt_prop", "pid", "eid", $this->id); 
 	}
 
+	// links an property tot his event
+	public function addProperty($pid)
+	{
+		return DB::dual_insert("evnt_prop", "eid", "pid", $this->id, $pid);
+	}
+
 	// Returns true if the user is an organisator of this event
 	public function isOrganisator($uid)
 	{

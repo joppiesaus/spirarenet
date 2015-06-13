@@ -26,7 +26,12 @@ function search()
 
 function submit(id)
 {
-	submitSelectedProperties("eventsystem.php?action=addproperties&eid=" + id);
+	submitSelectedProperties("eventsystem.php?action=addproperties&eid=" + id,
+		function()
+		{
+			userNotify(this.responseText);
+		}
+	);
 }
 
 </script>

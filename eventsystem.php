@@ -1,5 +1,7 @@
 <?php
 
+// I suck at error messages
+
 header("Content-Type:text/plain");
 
 if (empty($_GET["action"]))
@@ -15,14 +17,56 @@ if (!isset($_SESSION["uid"]))
 	exit;
 }
 
+if (!isset($_GET["eid"]))
+{
+	echo "No event!";
+	exit;
+}
+
 require "main.php";
 
 $uid = $_SESSION["uid"];
+$eid = $_GET["eid"];
+
+$evnt;
+
+try
+{
+	$evnt = new Event($eid);
+}
+catch (NotFoundException $ex)
+{
+	echo "Event " . $eid . " not found!";
+	exit;
+}
+
+$isOrganisator = $evnt->isOrganisator($uid);
 
 switch ($_GET["action"])
 {
 	case "addproperties":
-		
+
+		if (empty($_POST["pids"]))
+		{
+			echo "No properties to link!";
+			exit;
+		}
+
+		if (!$isOrganisator)
+		{
+			echo "Wrong permissions!";
+			exit;
+		}
+
+		$pids = json_decode($_POST["pids"]);
+
+		foreach ($pids as $pid)
+		{
+			$evnt->addProperty($pid);
+		}
+
+		echo "Succesfully added properties!";
+
 		break;
 
 	default:
